@@ -2,13 +2,8 @@
   "name": "portfolio",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "webpack-dev-server --content-base src --inline --hot"
-  },
-  "author": "Fabrice Toussaint",
-  "license": "ISC",
+  "main": "webpack.config.js",
+
   "dependencies": {
     "babel-loader": "^6.2.0",
     "babel-plugin-add-module-exports": "^0.1.2",
@@ -29,6 +24,13 @@
     "node-neat": "^1.7.2",
     "webpack": "^1.13.0"
   },
-  "devDependencies": {}
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "webpack-dev-server --content-base src --inline --hot"
+  },
+
+    "author": "Fabrice Toussaint",
+    "license": "ISC"
 
 }
