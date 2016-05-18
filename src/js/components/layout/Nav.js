@@ -51,7 +51,7 @@ export default class Nav extends React.Component{
             </ul>
           </nav>
         </div>
-      </header>
+      </header> 
 
 
 
