@@ -18,7 +18,7 @@ ReactDOM.render(
       <Route path="work" name="work" component={Work}></Route>
       <Route path="about" name="about" component={About}></Route>
       <Route path="blog" name="blog" component={Blog}></Route>
-      <Route path="contact" name="contact" component={Blog}></Route>
+      <Route path="contact" name="contact" component={Contact}></Route>
     </Route>
   </Router>,
 app);

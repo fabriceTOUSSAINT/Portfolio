@@ -1,0 +1,22 @@
+@import "bourbon/bourbon";
+@import "neat/neat";
+@import "base/base";
+@import "components/nav";
+
+$mobile: new-breakpoint(max-width 500px 4);
+
+section {
+  @include outer-container;
+  aside {
+    @include span-columns(3);
+    @include media($mobile){
+      @include span-columns(4);
+    }
+  }
+  article {
+    @include span-columns(9);
+    @include media($mobile){
+      @include span-columns(4);
+    }
+  }
+}
