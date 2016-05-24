@@ -17,7 +17,3 @@ Backtrace:
 /Users/fabricetoussaint/.rbenv/versions/2.2.3/bin/sass:23:in `load'
 /Users/fabricetoussaint/.rbenv/versions/2.2.3/bin/sass:23:in `<main>'
 */
-body:before {
-  white-space: pre;
-  font-family: monospace;
-  content: "Errno::ENOENT: No such file or directory @ rb_sysopen - scss"; }

@@ -1,9 +1,10 @@
-# Fabrice Toussaint portfolio
+# Fabrice Toussaint's Portfolio
 
-#Built using the following:
+> In Process
+
+##Built using the following:
 
 * React js
 * webpack
 * Sass
 * Bourbon, Neat and Bitters
-* Ghost blogging platform

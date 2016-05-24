@@ -28,7 +28,7 @@ export default class Nav extends React.Component{
       <header class="navigation" role="banner">
         <div class="navigation-wrapper">
           <a href="javascript:void(0)" class="logo">
-            <img src="https://raw.githubusercontent.com/thoughtbot/refills/49db8c0f2f8066c2c3a275781503fe3303a1a9fc/source/images/placeholder.png" alt="Logo Image" />
+            <h4>Fabrice Toussaint | </h4>
           </a>
           <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">MENU</a>
           <nav role="navigation">
@@ -49,45 +49,26 @@ export default class Nav extends React.Component{
                 <Link to="contact" onClick={this.toggleCollapse.bind(this)}>Contact</Link>
               </li>
             </ul>
+
           </nav>
+          <ul class="social-nav">
+            <li>
+              <a href="https://github.com/fabriceTOUSSAINT" target="_blank">
+                <i class="fa fa-github" aria-hidden="true"></i></a></li>
+            <li><a href="https://twitter.com/fabriceBT" target="_blank">
+              <i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+            <li><a href="https://instagram.com/croissant__" target="_blank">
+              <i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+          </ul>
         </div>
-      </header> 
+      </header>
 
 
 
 
 
-      // <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-      //   <div class="container">
-      //     <div class="navbar-header">
-      //       <button type="button" class="navbar-toggle" onClick={this.toggleCollapse.bind(this)} >
-      //         <span class="sr-only">Toggle navigation</span>
-      //         <span class="icon-bar"></span>
-      //         <span class="icon-bar"></span>
-      //         <span class="icon-bar"></span>
-      //       </button>
-      //     </div>
-      //     <div class={"navbar-collapse " + navClass} id="bs-example-navbar-collapse-1">
-      //       <ul class="nav navbar-nav">
-      //         <li class={homeClass}>
-      //           <IndexLink to="/" onClick={this.toggleCollapse.bind(this)}>Home</IndexLink>
-      //         </li>
-      //         <li class={workClass}>
-      //           <Link to="work" onClick={this.toggleCollapse.bind(this)}>Work</Link>
-      //         </li>
-      //         <li class={aboutClass}>
-      //           <Link to="about" onClick={this.toggleCollapse.bind(this)}>About</Link>
-      //         </li>
-      //         <li class={blogClass}>
-      //           <Link to="blog" onClick={this.toggleCollapse.bind(this)}>Blog</Link>
-      //         </li>
-      //         <li class={contactClass}>
-      //           <Link to="contact" onClick={this.toggleCollapse.bind(this)}>Contact</Link>
-      //         </li>
-      //       </ul>
-      //     </div>
-      //   </div>
-      // </nav>
+
+
     );
   }
 }
