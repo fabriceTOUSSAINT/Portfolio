@@ -1,8 +1,8 @@
 import React from "react";
+import { Link } from "react-router";
 
 
 
-export default class Works extends React.Component{
 var tabList = [
     { 'id': 1, 'num': '1', 'name': 'Hooptee Celebrity Golf', 'initials': 'Ht', 'url': '/ht', 'photo': 'images/port-bg-ht.jpg' },
     { 'id': 2, 'num': '2', 'name': 'Achievements Unlimited', 'initials': 'Au', 'url': '/au', 'photo': 'images/port-bg-au.jpg' },
@@ -103,6 +103,7 @@ var Content = React.createClass({
                 </div>
                 :null}
 
+
                 {this.props.currentTab === 2 ?
                 <div className="au">
                       <div className="left col-sm-6">
@@ -156,7 +157,7 @@ var Content = React.createClass({
 		            </div>
 		        </div>
                 <div className="col-sm-6 desc">
-                	<h1>photography Portfolio</h1>
+                	<h1>Photography Portfolio</h1>
                 	<p>Personal photography portfolio</p>
 				<a className="port-btn" href="photoPort.html">Check it out yourself</a>
 				              	</div>
@@ -169,7 +170,10 @@ var Content = React.createClass({
     }
 });
 
-var App = React.createClass({
+
+
+
+var Works = React.createClass({
     getInitialState: function () {
         return {
             tabList: tabList,
@@ -196,4 +200,4 @@ var App = React.createClass({
     }
 });
 
-}
+export default Works;

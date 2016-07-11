@@ -1,4 +1,6 @@
 # Fabrice Toussaint's Portfolio
+| $npm run dev
+
 
 > In Process
 

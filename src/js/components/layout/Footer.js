@@ -4,11 +4,7 @@ export default class Footer extends React.Component{
   render(){
     return(
       <footer>
-        <div class="row">
-          <div class="col-lg-12">
-            <p>Copyright &copy; Fabrice Toussaint</p>
-          </div>
-        </div>
+          <p>Designed & Developed by <span>Fabrice Toussaint</span></p>
       </footer>
     );
   }
