@@ -15,8 +15,12 @@ h6 {
   font-size: modular-scale(1);
   line-height: $heading-line-height;
   margin: 0 0 $small-spacing;
-}
 
+}
+h2{
+  font-size: 1.2em;
+  font-weight: 500;
+}
 p {
   margin: 0 0 $small-spacing;
 }

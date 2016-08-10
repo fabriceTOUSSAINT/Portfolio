@@ -24,8 +24,11 @@ module.exports = {
     ]
   },
   output: {
-    filename: "client.min.js",
-    path: __dirname + "/src"
+    // Uncomment to build
+  publicPath:  __dirname + "/build",
+     //path: __dirname + "/src",
+    filename: "bundle.min.js"
+
   },
   plugins: debug ? [] : [
     new webpack.optimize.DedupePlugin(),

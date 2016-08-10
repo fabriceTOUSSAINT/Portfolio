@@ -4,9 +4,9 @@ import { Link } from "react-router";
 
 
 var tabList = [
-    { 'id': 1, 'num': '1', 'name': 'Hooptee Celebrity Golf', 'initials': 'Ht', 'url': '/ht', 'photo': 'images/port-bg-ht.jpg' },
+    { 'id': 1, 'num': '1', 'name': 'Treasure Coast CrossFit', 'initials': 'Tt', 'url': '/cc', 'photo': 'images/tc-bg.jpg' },
     { 'id': 2, 'num': '2', 'name': 'Achievements Unlimited', 'initials': 'Au', 'url': '/au', 'photo': 'images/port-bg-au.jpg' },
-    { 'id': 3, 'num': '3', 'name': 'Crown City Crossfit', 'initials': 'Cc', 'url': '/cc', 'photo': 'images/port-bg-cc.jpg' },
+    { 'id': 3, 'num': '3', 'name': 'Rigquipment Finance', 'initials': 'Rf', 'url': '/ht', 'photo': 'images/rf-bg.jpg' },
     { 'id': 4, 'num': '4','name': 'Photography Portfolio', 'initials': 'Ft', 'url': '/ft', 'photo': 'images/port-square.jpg' }
 ];
 
@@ -18,9 +18,9 @@ var Tab = React.createClass({
 
     render: function(){
         return (
-        	<div className={'pt-button col-xs-12 col-sm-3 pt-hover wow fadeIn'}>
+        	<div className={'pt-button pt-hover wow fadeIn'}>
               <figure>
-                <a onClick={this.handleClick} href={this.props.url} >
+                <a onClick={this.handleClick} href={this.props.url}>
 
 
                 <img src={this.props.photo} />
@@ -51,8 +51,7 @@ var Tabs = React.createClass({
         return (
 
 
-<div className={'container pt-wrap'}>
-    <div className={'row'}>
+<div className={'pt-wrap'}>
                 {this.props.tabList.map(function(tab) {
                     return (
                         <Tab
@@ -67,7 +66,6 @@ var Tabs = React.createClass({
                          />
                     );
                 }.bind(this))}
-	  </div>
 </div>
         );
     }
@@ -75,38 +73,46 @@ var Tabs = React.createClass({
 
 var Content = React.createClass({
     render: function(){
+
+
         return(
-            <div className="content">
-            <div className="container">
-            <div className="row">
+            <div className="content" id="content">
+
                 {this.props.currentTab === 1 ?
-                <div className="ht">
+                    <div className="cc">
+                           <div className="left">
+                        <div className="desktop">
+                        	<div className="wrapper">
+                        		<div className="holder">
+    		                    	<img src="images/tccf-ss2.png" />
+    		                    </div>
+    		                	</div>
+    		            </div>
+    		        </div>
+                    <div className="desc">
+                    	<h1>Treasure Coast CrossFit</h1>
+                        <hr/>
+    	                	<p>Collaborating with <a href="http://321goproject.com/" target="_blank">321goproject</a> I have worked alongside their senior developer to build the Frontend and launch of Treasure Coast CrossFit, and many others over the past year. I was additionally given the responsibility of maintaining previous sites and developing new sites from PSD to live.</p>
+                                <div className="tag">
+                                    <h2>Tools used</h2>
+                                    <p>HTML5</p>
+                                    <p>CSS3</p>
+                                    <p>JavaScript</p>
+                                    <p>PHP</p>
+                                    <p>WordPress</p>
+                                    <p>API</p>
+                                </div>
+    					<a className="port-btn" href="http://treasurecoastcrossfit.com/" target="_blank">Check it out yourself</a>
+                    	</div>
+                    </div>
 
-                   <div className="left col-sm-6">
-                    <div className="desktop">
-                    	<div className="wrapper">
-                    		<div className="holder">
-		                    	<img src="images/ht-ss.png" />
-		                    </div>
-		                </div>
-		            </div>
-		        </div>
 
-
-
-                	<div className="col-sm-6 desc">
-	                	<h1>Hooptee</h1>
-	                	<p>Full redesign & redevelopment of entire site.</p>
-	                	<p>set up hosting, paypal transactions, direct purchase button to photographer</p>
-	                	<a className="port-btn" href="http://hooptee.com/" target="_blank">Check it out yourself</a>
-                	</div>
-                </div>
                 :null}
 
 
                 {this.props.currentTab === 2 ?
                 <div className="au">
-                      <div className="left col-sm-6">
+                      <div className="left">
                     <div className="desktop">
                     	<div className="wrapper">
                     		<div className="holder">
@@ -115,39 +121,63 @@ var Content = React.createClass({
 		                </div>
 		            </div>
 		        </div>
-                <div className="col-sm-6 desc">
-                	<h1>Achievements Unlimited</h1>
-	                	<p>Full redesign & redevelopment of entire site.</p>
-	                	<p>set up hosting, paypal transactions, direct purchase button to photographer</p>
-                	<a className="port-btn" href="http://achievementsunlimited.com/" target="_blank">Check it out yourself</a>
+                <div className="desc">
+                    <h1>Achievements Unlimited</h1>
+                    <hr />
+                    <p>Achievements Unlimited needed a full redesign, development and a mobile/SEO friendly website</p>
+                    <p>Some key requests i implemented on their site included; a photo carousel and gallery of past and current events. Also built, was an "Order Print" option that allows interested users to email the photographer to purchase a photo from the carousel and automatically include all neccessary information of the photo to be sent to the photographer to open communication up.</p>
+
+
+                    <div className="tag">
+                        <h2>Tools used</h2>
+                        <p>HTML5</p>
+                        <p>CSS3</p>
+                        <p>PHP</p>
+                        <p>JavaScript</p>
+                        <p>Bootstrap</p>
+                    </div>
+                <a className="port-btn" href="http://achievementsunlimited.com/" target="_blank">Check it out yourself</a>
                 	</div>
                 </div>
                 :null}
 
                 {this.props.currentTab === 3 ?
-                <div className="cc">
-                       <div className="left col-sm-6">
-                    <div className="desktop">
-                    	<div className="wrapper">
-                    		<div className="holder">
-		                    	<img src="images/cc-ss.png" />
-		                    </div>
-		                	</div>
-		            </div>
-		        </div>
-                <div className="col-sm-6 desc">
-                	<h1>CrossFit Crown City</h1>
-	                	<p>Front-end/Wordpress</p>
-	                	<p>Designed and Developed Homepage</p>
+                    <div className="ht">
 
-					<a className="port-btn" href="http://crossfitcrowncity.com/" target="_blank">Check it out yourself</a>
-                	</div>
-                </div>
+                       <div className="left">
+                            <div className="desktop">
+                            	<div className="wrapper">
+                            		<div className="holder">
+        		                    	<img src="images/rf-ss.png" />
+        		                    </div>
+        		                </div>
+        		            </div>
+        		        </div>
+
+
+
+                    	<div className="desc">
+    	                	<h1>Rigquipment Finance</h1>
+                                <hr/>
+            	                	<p>Collaborating with <a href="http://321goproject.com/" target="_blank">321goproject</a> I have worked alongside their senior developer to build the Frontend and launch of Rigquipment Finance, and many others.</p>
+
+
+                            <div className="tag">
+                                <h2>Tools used</h2>
+                                    <p>HTML5</p>
+                                    <p>CSS3</p>
+                                    <p>JavaScript</p>
+                                    <p>PHP</p>
+                                    <p>WordPress</p>
+                            </div>
+                            <a className="port-btn" href="https://rigquipment.com/" target="_blank">Check it out yourself</a>
+                    	</div>
+                    </div>
                 :null}
 
                 {this.props.currentTab === 4 ?
                 <div className="ft">
-                        <div className="left col-sm-6">
+                        <div className="left">
                     <div className="desktop">
                     	<div className="wrapper">
                     		<div className="holder">
@@ -156,15 +186,21 @@ var Content = React.createClass({
 		                </div>
 		            </div>
 		        </div>
-                <div className="col-sm-6 desc">
+                <div className="desc">
                 	<h1>Photography Portfolio</h1>
+                    <hr/>
                 	<p>Personal photography portfolio</p>
-				<a className="port-btn" href="photoPort.html">Check it out yourself</a>
+                        <div className="tag">
+                            <h2>Technology</h2>
+                            <p>HTML5</p>
+                            <p>CSS3</p>
+                            <p>JavaScript</p>
+                        </div>
+				<a className="port-btn" href="old-photo-port/photoPort.html" target="_blank">Check it out yourself</a>
 				              	</div>
                 </div>
                 :null}
-            </div>
-            </div>
+
             </div>
         );
     }

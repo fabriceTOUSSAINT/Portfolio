@@ -1,7 +1,12 @@
 import React from "react";
 import { Link } from "react-router";
+require('../../scss/style.scss');
 
+import Footer from "../components/layout/Footer";
+import Nav from "../components/layout/Nav";
 import Works from "../components/layout/Works";
+import About from "../components/layout/About";
+import Contact from "../components/layout/Contact";
 
 export default class Home extends React.Component{
   render(){
@@ -9,13 +14,17 @@ export default class Home extends React.Component{
 
     return(
     <div>
-      <div className="hero">
-         <img  src="images/ftLogo.png" alt="Logo" />
+      <Nav />
+      <div className="hero parallax" id="hero" data-parallax="scroll">
+         <img  id="hfirst" src="images/fab-logo-wht.png" alt="Logo" />
          <div className="info">
-             <span>DEVELOPER | PHOTOGRAPHER | EXPLORER</span>
+             <span><span  id="hsecond">DEVELOPER |</span> <span  id="hthird">EXPLORER |</span> <span  id="hfourth">PHOTOGRAPHER</span></span>
        </div>
      </div>
-       <Works/>
+     <Works/>
+     <About/>
+     <Contact/>
+     <Footer />
     </div>
 
     );

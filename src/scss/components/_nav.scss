@@ -52,10 +52,27 @@ header.navigation {
         padding: 13.5px 0;
     }
   }
-  ul.social-nav {
+  .social-nav {
       float: right;
   }
+  i.fa.fa-codepen {
+    color: #777;
+}
   // Mobile view
+  .social-nav li {
+    display: inline !important;
+}
+.social-nav {
+    @include media (300px){
+    height: 60px;
+   li{
+    display: inline !important;
+  }
+}
+@include media ($horizontal-bar-mode) {
+height:50px;
+}
+}
 
   .navigation-menu-button {
     color: $font-color;
@@ -84,9 +101,7 @@ header.navigation {
     min-height: $navigation-height;
     z-index: 9999999;
 
-    @include media ($horizontal-bar-mode) {
-      float: left;
-    }
+
   }
 
   ul.navigation-menu {
@@ -133,6 +148,7 @@ header.navigation {
       color: $navigation-color;
       display: inline-block;
       text-decoration: none;
+      cursor:pointer;
 
       @include media ($horizontal-bar-mode) {
         padding-right: 1em;
@@ -282,11 +298,14 @@ header.navigation {
 // Social
 
 
-ul.social-nav li {
+span.social-nav li {
     font-size: 26px !important;
 }
 .social-nav a {
     padding-right: 0 !important;
+}
+.social-nav {
+    float: right;
 }
 i.fa.fa-twitter {
     color: #3cf;
