@@ -1,12 +1,9 @@
 # Fabrice Toussaint's Portfolio
-| $npm run dev
+>Project | Portfolio
 
-
-> In Process
-
-##Built using the following:
+I wanted to create  portfolio for my work but i also wanted to learn something new. I took on the challenge to both learn and better my self with the following tools:
 
 * React js
-* webpack
+* Webpack
 * Sass
-* Bourbon, Neat and Bitters
+* Bourbon, Neat

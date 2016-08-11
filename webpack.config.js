@@ -25,8 +25,8 @@ module.exports = {
   },
   output: {
     // Uncomment to build
-  publicPath:  __dirname + "/build",
-     //path: __dirname + "/src",
+  //publicPath:  __dirname + "/build",
+     path: __dirname + "/src",
     filename: "bundle.min.js"
 
   },
