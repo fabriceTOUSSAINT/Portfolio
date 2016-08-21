@@ -5,7 +5,7 @@ export default class Contact extends React.Component{
     return(
       <div className="contact" >
         <section className="tech-list">
-          <h2>Technology i enjoy using</h2>
+          <h2>Technology I enjoy using</h2>
             <ul>
               <li>
                 <img src="images/tech/html5.png" />
@@ -31,11 +31,11 @@ export default class Contact extends React.Component{
 
             </ul>
         </section>
-        <h3 id="contact">Lets Create</h3>
+        <h3 id="contact">Let's Create</h3>
 
         <div id="email" class="animated">
         <h2>Say Hello,</h2>
-        <a href="mailto:developer@fabricebt.com">Developer@Fabricebt.com</a>
+        <a href="mailto:developer@fabricebt.com">Developer@fabricebt.com</a>
         </div>
 
           <aside>

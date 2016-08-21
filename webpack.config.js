@@ -1,8 +1,16 @@
 var debug = process.env.NODE_ENV !== "production";
 var webpack = require('webpack');
 var path = require('path');
+//
+// var Dashboard = require('webpack-dashboard');
+// var DashboardPlugin = require('webpack-dashboard/plugin');
+// var dashboard = new Dashboard();
+
+
+
 
 module.exports = {
+  quiet: false,
   context: path.join(__dirname, "src"),
   devtool: debug ? "inline-sourcemap" : null,
   entry: "./js/client.js",
@@ -25,14 +33,17 @@ module.exports = {
   },
   output: {
     // Uncomment to build
+
   //publicPath:  __dirname + "/build",
      path: __dirname + "/src",
     filename: "bundle.min.js"
 
   },
+
   plugins: debug ? [] : [
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.optimize.UglifyJsPlugin({ mangle: false, sourcemap: false }),
+  //  new DashboardPlugin(dashboard.setData)
   ],
 };

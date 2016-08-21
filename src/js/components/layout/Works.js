@@ -125,7 +125,7 @@ var Content = React.createClass({
                     <h1>Achievements Unlimited</h1>
                     <hr />
                     <p>Achievements Unlimited needed a full redesign, development and a mobile/SEO friendly website</p>
-                    <p>Some key requests i implemented on their site included; a photo carousel and gallery of past and current events. Also built, was an "Order Print" option that allows interested users to email the photographer to purchase a photo from the carousel and automatically include all neccessary information of the photo to be sent to the photographer to open communication up.</p>
+                    <p>Some key requests I implemented on their site included; a photo carousel and gallery of past and current events. Also built was an "Order Print" option that allows interested users to email the photographer to purchase a photo from the carousel and automatically include all neccessary information of the photo to be sent to the photographer to open communication up.</p>
 
 
                     <div className="tag">
