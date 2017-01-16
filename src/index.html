@@ -22,8 +22,9 @@
 <body>
   <div id="app"></div>
 
-  <script src="https://code.jquery.com/jquery-2.2.3.min.js"   integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo="   crossorigin="anonymous"></script>
+  <!-- <script src="https://code.jquery.com/jquery-2.2.3.min.js"   integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo="   crossorigin="anonymous"></script> -->
 
+  <script src="jquery-1.8.1.js"></script>
   <script src="../bundle.min.js"></script>
   <script src="js/noframework.waypoints.min.js"></script>
   <script src="js/parallax.min.js"></script>
@@ -39,7 +40,17 @@
   ga('create', 'UA-68272430-3', 'auto');
   ga('send', 'pageview');
 
+  (function(h,o,t,j,a,r){
+      h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+      h._hjSettings={hjid:273590,hjsv:5};
+      a=o.getElementsByTagName('head')[0];
+      r=o.createElement('script');r.async=1;
+      r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+      a.appendChild(r);
+  })(window,document,'//static.hotjar.com/c/hotjar-','.js?sv=');
+
 </script>
+
 </body>
 
 </html>

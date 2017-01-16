@@ -5,8 +5,6 @@ Licensed under the MIT license.
 https://github.com/imakewebthings/waypoints/blog/master/licenses.txt
 */
 (function() {
-  'use strict'
-
   var displayNoneMessage = [
     'You have a Waypoint element with display none. For more information on ',
     'why this is a bad idea read ',
