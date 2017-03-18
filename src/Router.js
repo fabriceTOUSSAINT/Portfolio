@@ -1,9 +1,4 @@
 import React from 'react';
-// import {
-//   BrowserRouter as Router,
-//   Route,
-//   Link
-// } from 'react-router-dom';
 import {Router, Route, Link, browserHistory} from 'react-router';
 
 import Home from './modules/Home/Home.js';

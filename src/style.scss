@@ -1,3 +1,122 @@
+@import 'normalize';
+
+.home {
+    font-family: 'Fira Sans', sans-serif;
+    font-size: 1.5em;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    background-image: url('homebg.jpg');
+    background-size: cover;
+
+    * {
+        font-weight: 400;
+    }
+
+    &-dev{ background-image: url('dev-bg.jpg');}
+    &-name{ background-image: url('sick.jpg');}
+    &-photo{ background-image: url('photo.jpg');}
+
+
+
+    &--block{
+        width: 100%;
+        // background-color: #fff;
+        // padding-left: 30px;
+        position: relative;
+        margin-right: 0px;
+        transition: all ease .2s;
+
+        &--wrapper {
+            padding-left: 30px;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10;
+        }
+
+        h1 {
+            background-color: #fff;
+            padding: 15px;
+            padding-right: 50px;
+            display: inline-flex;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+
+        &__shift {
+            margin-right: 120px;
+            transition: al lease .2s;
+        }
+
+        &__slider {
+            background-color:#fff;
+            height: 100vh;
+            position: relative;
+            right: 0;
+            transition: all ease .2s;
+
+            &--slide {
+                right:60%;
+            }
+        }
+    }
+
+    &--left {
+        width: 10px;
+        height: 100vh;
+        left: 0;
+        z-index: 10;
+
+        div {
+            height: 20vh;
+        }
+
+        &__block1{
+            background-color: #271F30;
+        }
+        &__block2{
+            background-color: #8EB8E5;
+        }
+        &__block3{
+            background-color: #D76A03;
+        }
+        &__block4{
+            background-color: #E5E059;
+        }
+        &__block5{
+            background-color: #8C1C13;
+        }
+    }
+
+    &--block {
+
+        &__name {
+            color: #d76a03;
+        }
+
+        &__dev{
+            color: #8EB8E5;
+        }
+
+        &__photo {
+            color: #E5E059;
+        }
+        &__email {
+            color: #8C1C13;
+        }
+        &__blog {
+            color: #271F30;
+        }
+        &__twitter {
+            color: #8EB8E5;
+        }
+    }
+
+
+}
+
+
 .App-header {
     h2{
         color: green;
