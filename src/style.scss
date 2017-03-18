@@ -17,12 +17,8 @@
     &-name{ background-image: url('sick.jpg');}
     &-photo{ background-image: url('photo.jpg');}
 
-
-
     &--block{
         width: 100%;
-        // background-color: #fff;
-        // padding-left: 30px;
         position: relative;
         margin-right: 0px;
         transition: all ease .2s;
@@ -39,7 +35,7 @@
             background-color: #fff;
             padding: 15px;
             padding-right: 50px;
-            display: inline-flex;
+            display: inline-block;
             margin: 10px 0;
             border-radius: 4px;
         }
@@ -95,11 +91,9 @@
         &__name {
             color: #d76a03;
         }
-
         &__dev{
             color: #8EB8E5;
         }
-
         &__photo {
             color: #E5E059;
         }
