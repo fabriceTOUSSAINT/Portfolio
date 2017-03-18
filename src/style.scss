@@ -54,9 +54,10 @@
             height: 100vh;
             position: relative;
             right: 0;
-            transition: all ease .2s;
+            transition: all ease 1s;
 
             &--slide {
+                transition: all ease .4s;
                 right:60%;
             }
         }
