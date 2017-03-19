@@ -6,16 +6,36 @@
     width: 100vw;
     height: 100vh;
     display: flex;
-    background-image: url('homebg.jpg');
     background-size: cover;
+    background-position-x: 300px;
+    background-repeat: no-repeat;
+    transition: background-position-x cubic-bezier(0.82, 0, 0.44, 0.93) 1s;
 
     * {
         font-weight: 400;
     }
 
-    &-dev{ background-image: url('dev-bg.jpg');}
-    &-name{ background-image: url('sick.jpg');}
-    &-photo{ background-image: url('photo.jpg');}
+    &-dev{
+        background-image: url('images/dev-bg.jpg');
+    }
+    &-name{
+        background-image: url('images/fab.jpg');
+    }
+    &-photo{
+        background-image: url('images/flamezzz.gif');
+        background-size: 150px;
+        background-repeat: repeat;
+    }
+    &-blog {
+        background-image: url('images/sick.jpg');
+    }
+    &-twitter {
+        background-image: url('images/homebg.jpg');
+    }
+    &-slide{
+        background-position-x: 0px;
+        transition: background-position-x ease .4s;
+    }
 
     &--block{
         width: 100%;
@@ -50,7 +70,7 @@
             height: 100vh;
             position: relative;
             right: 0;
-            transition: all ease 1s;
+            transition: all cubic-bezier(0.82, 0, 0.44, 0.93) 1s;
 
             &--slide {
                 transition: all ease .4s;
@@ -109,6 +129,16 @@
     }
 
 
+}
+
+.logo {
+    height: 125px;
+    display: block;
+    top: 30px;
+    position: absolute;
+    z-index: 10;
+    left: 20px;
+    right: 20px;
 }
 
 

@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
-import {Link} from 'react-router';
+import {Link} from 'react-router-dom';
+
+//Images
+import logo from '../../images/fab-logo-wht.png'
 
 class Home extends React.Component {
   constructor(props){
@@ -21,9 +24,11 @@ class Home extends React.Component {
       const tag = e.target.className;
       const home = document.getElementsByClassName('home')[0];
 
-      if(tag == 'home--block__dev') { home.className = 'home home-dev' }
-      else if(tag == 'home--block__photo') { home.className = 'home home-photo' }
-      else if(tag == 'home--block__name') { home.className = 'home home-name' }
+      if(tag == 'home--block__dev') { home.className = 'home home-slide home-dev' }
+      else if(tag == 'home--block__photo') { home.className = 'home home-slide home-photo' }
+      else if(tag == 'home--block__name') { home.className = 'home home-slide home-name' }
+      else if(tag == 'home--block__blog') { home.className = 'home home-slide home-blog' }
+      else if(tag == 'home--block__twitter') { home.className = 'home home-slide home-twitter' }
       // else if(tag = 'home--block__dev') { home.className += ' home-dev' }
 
       // debugger;
@@ -37,8 +42,9 @@ class Home extends React.Component {
   shiftPageLeave(){
     if(this.state.pageRendered){
       const homePage = document.getElementsByClassName('home--block__slider')[0];
-      homePage.className = 'home--block__slider';
-      console.log('leave');
+      const home = document.getElementsByClassName('home')[0];
+      home.classList.remove('home-slide');
+      homePage.classList.remove('home--block__slider--slide');
     }
     // homePage.className = '';
   }
@@ -54,6 +60,7 @@ class Home extends React.Component {
           <div className="home--left__block5" />
         </div>
         <div className="home--block">
+          <img src={logo} className="logo" />
           <div className="home--block--wrapper">
             <h1>Hello, I'm <Link to='/About'
               className="home--block__name"

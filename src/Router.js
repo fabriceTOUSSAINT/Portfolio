@@ -8,7 +8,7 @@ import Photography from './modules/Photography';
 
 export default (
     <Router history={browserHistory}>
-        <div>
+        <div className="jawn">
             <ul>
                 <li><Link to='/'>Home</Link></li>
                 <li><Link to='/About'>About</Link></li>
