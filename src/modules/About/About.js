@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom';
 class About extends Component {
   render() {
     return (
-      <div className="App">
+      <div className="about">
             <ul>
                 <li><Link to='/'>Home</Link></li>
                 <li><Link to='/About'>About</Link></li>
