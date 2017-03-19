@@ -11,24 +11,50 @@ class Home extends React.Component {
 
     // determine if current page is home or not, to properly display the navigation/sidebar
     this.state = {
-      homePage: false
+      onHome: true //default
     };
     this.handleClick = this.handleClick.bind(this);
   }
 
   handleClick(e) {
-    // e.preventDefault();
-    const whiteSlider = document.getElementsByClassName('home--block__slider');
+    const whiteSlider = document.getElementsByClassName('home--block__slider')[0];
     const imageBackground = document.getElementsByClassName('home')[0];
+    const fullNav = document.getElementsByClassName('home--block--wrapper')[0];
+    const pageNav = document.getElementsByClassName('home--block--offHome')[0];
+
+    this.setState({onHome:false});
     let screenW = window.innerWidth;
     //FIXME: Hack for full slide off screen
     if(screenW < 1200) {screenW = 1200;}
 
-    Velocity(whiteSlider, {translateX:'-50%'});
+    Velocity(whiteSlider, {width: '200px'});
     // Once i figure out exact photos i will use, include their dimension on the image itself
     // pull image name, regex for size and follow this
     // http://stackoverflow.com/questions/21127479/getting-the-height-of-a-background-image-resized-using-background-size-contain
     Velocity(imageBackground, {backgroundPositionX: -screenW}, [0.82, 0, 0.44, 0.93]);
+    Velocity(fullNav,{
+      translateX:'-1500',
+      // opacity: '1',
+      // width: '200px',
+      // height: '100px',
+      // translateY: '0',
+    }, [0.82, 0, 0.44, 0.93]);
+    // if(fullNav.children){
+    //   const navArr = Array.prototype.slice.call(fullNav.children);
+    //   navArr.forEach((el) => {
+    //     debugger;
+    //     if(el.tagName === 'H1'){
+    //       Velocity(el, {
+    //         fontSize: '.3em',
+    //         padding: '0'
+    //       });
+    //     }
+    //   });
+    // }
+    Velocity(pageNav, {
+      opacity: '1',
+
+    });
 
   }
 
@@ -57,7 +83,6 @@ class Home extends React.Component {
   }
 
   render() {
-    console.warn('rerender');
     return (
       <div className="home">
         <div className="home--left">
@@ -107,9 +132,15 @@ class Home extends React.Component {
             </h1><br/>
             <h1>Lets Create, <a href='mailto:developer@fabricebt.com' className="home--block__email">developer@fabricebt.com</a></h1><br/>
           </div>
+          <div className="home--block--offHome">
+            <Link to='/About'>About</Link>
+            <Link to='/Work'>Developer</Link>
+            <Link to='/Photography'>Photographer</Link>
+            <Link to='/Blog'>Blog</Link>
+            <a href='mailto:developer@fabricebt.com' className='home--block--mobile__email'>Email</a>
+          </div>
           <div className="home--block__slider"></div>
         </div>
-        {this.props.children}
       </div>
     );
   }

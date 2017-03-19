@@ -10,7 +10,7 @@
     transition: background-position-x cubic-bezier(0.82, 0, 0.44, 0.93) 1s;
     z-index: 99999;
     position: absolute;
-    
+
     &-dev{background-image: url('images/dev-bg.jpg');}
     &-name{background-image: url('images/fab.jpg');}
     &-blog {background-image: url('images/sick.jpg');}
@@ -58,13 +58,16 @@
         &__slider {
             background-color:#fff;
             height: 100vh;
+            width: 100%;
             position: relative;
             right: 0;
             transition: all cubic-bezier(0.82, 0, 0.44, 0.93) 1s;
 
             &--slide {
                 transition: all ease .4s;
-                right: 60%;
+                // right: 60%;
+                width: 40%;
+                left: 0;
             }
         }
     }

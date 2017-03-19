@@ -1,5 +1,9 @@
-.about {
+.about, .App {
   background-color:blue;
   width:100%;
   height:100vh;
+  left: 220px;
+  display: flex;
+  position: relative;
+
 }
