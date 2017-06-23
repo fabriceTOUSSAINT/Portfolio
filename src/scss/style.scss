@@ -4,6 +4,7 @@
 @import "components/nav";
 @import "components/footer";
 
+$preTablet: new-breakpoint(max-width 1110px 4);
 $tablet: new-breakpoint(max-width 960px 4);
 $mobile: new-breakpoint(max-width 680px 4);
 
@@ -154,33 +155,59 @@ div#email {
 ####################################*/
 div.about {
     max-width: 100%;
-      min-height: 630px;
-      @include media($mobile){
-        min-height: 300px;
-      }
-    aside{
+    min-height: 900px;
+    @media only screen and (max-width:1300px) {
+        min-height: 1000px;
+    }
+    @include media($mobile){
+      min-height: 300px;
+    }
+
+    &__wrapper {
+        max-width: 600px;
+
+        @include media($tablet) {
+            max-width: 800px !important;
+            margin: 0 auto !important;
+        }
+    }
+
+    aside {
       @include span-columns(6);
       float:right;
       background-color: #fffafa;
 
       width: 50% !important;
-      height: 425px !important;
-      margin-top: 225px;
-      padding: 50px 55px 0px !important;
-      @include media($tablet){
-        width: 100% !important;
-            margin-top: 525px;
+      height: 725px;
+      margin-top: 175px;
+      // overflow: hidden;
+      padding: 50px 80px 0px;
 
-      }@include media($mobile){
-        margin-top: 300px;
-        margin-bottom: 80px;
-        height: auto !important;
+      @include media($preTablet) {
+        height: 1000px !important;
+        padding-top: 100px !important;
+        margin-top: 0 !important;
       }
 
-    h2 {
-    font-size: 1.5em;
-}
-  }
+      @include media($tablet){
+        width: 100% !important;
+        margin-top: 525px !important;
+        height: auto !important;
+        margin-bottom: 80px !important;
+      }
+
+      @include media($mobile){
+        margin-top: 300px !important;
+      }
+
+      h2 {
+          font-size: 1.5em;
+      }
+
+      a {
+        display: inline-block;
+      }
+    }
 }
 
 div.contact .tech-list img {
@@ -522,4 +549,23 @@ a.port-btn {
 a.port-btn:hover {
     background: #271F30;
     text-decoration: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media only screen and (max-width:1300px) {
+    .about__aside {
+        height: 825px !important;
+        padding: 50px 55px 0px !important;
+    }
 }
