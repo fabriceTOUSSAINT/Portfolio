@@ -22,38 +22,37 @@ class Home extends React.Component {
     const fullNav = document.getElementsByClassName('home--block--wrapper')[0];
     const pageNav = document.getElementsByClassName('home--block--offHome')[0];
 
+    const linkItems = document.getElementsByClassName('link-item');
+    const Fabrice = document.getElementsByClassName('home--block__name')[0];
+    Fabrice.style.display = 'block';
+    Velocity(Fabrice, {
+      translateX: '1500px',
+    }, [0.82, 0, 0.44, 0.93])
+    // debugger;
+
+    const fadeItems = document.querySelectorAll('.home--block--wrapper span');
+    for (let x = 0; x < fadeItems.length; x++) {
+      fadeItems[x].style.opacity = '0';
+    };
+    // Velocity(fullNav, {
+    //   translateX: '-1500px',
+    // }, [0.82, 0, 0.44, 0.93]);
     this.setState({onHome:false});
     let screenW = window.innerWidth;
     //FIXME: Hack for full slide off screen
     if(screenW < 1200) {screenW = 1200;}
-
+    // debugger;
     Velocity(whiteSlider, {width: '200px'});
     // Once i figure out exact photos i will use, include their dimension on the image itself
     // pull image name, regex for size and follow this
     // http://stackoverflow.com/questions/21127479/getting-the-height-of-a-background-image-resized-using-background-size-contain
     Velocity(imageBackground, {backgroundPositionX: -screenW}, [0.82, 0, 0.44, 0.93]);
-    Velocity(fullNav,{
-      translateX:'-1500',
-      // opacity: '1',
-      // width: '200px',
-      // height: '100px',
-      // translateY: '0',
-    }, [0.82, 0, 0.44, 0.93]);
-    // if(fullNav.children){
-    //   const navArr = Array.prototype.slice.call(fullNav.children);
-    //   navArr.forEach((el) => {
-    //     debugger;
-    //     if(el.tagName === 'H1'){
-    //       Velocity(el, {
-    //         fontSize: '.3em',
-    //         padding: '0'
-    //       });
-    //     }
-    //   });
-    // }
+    // Velocity(fullNav,{
+    //   // translateX:'-1500',
+    //   translateX:'-20',
+    // }, [0.82, 0, 0.44, 0.93]);
     Velocity(pageNav, {
       opacity: '1',
-
     });
 
   }
@@ -82,62 +81,65 @@ class Home extends React.Component {
     homePage.classList.remove('home--block__slider--slide');
   }
 
+  renderLink = (string, linkClass, dest) => {
+    return <Link
+      to={dest}
+      className={linkClass}
+      onMouseOver={this.revealBackgroundOnHover}
+      onMouseLeave={this.hideBackgroundOnOff}
+      onClick={this.handleClick}> {string}
+    </Link>;
+  }
+
   render() {
     return (
-      <div className="home">
-        <div className="home--left">
+      <div className="home nav-page">
+        <div className="home--left nav-page--left-border">
           <span />
           <span />
           <span />
           <span />
           <span />
         </div>
-        <div className="home--block">
+        <div className="home--block nav-page__main">
           <Link to='/'>
             <img src={logo} className="logo" />
           </Link>
-          <div className="home--block--wrapper">
-            <h1>Hello, I'm <Link
-              to='/About'
-              className="home--block__name"
-              onMouseOver={this.revealBackgroundOnHover}
-              onMouseLeave={this.hideBackgroundOnOff}
-              onClick={this.handleClick}> Fabrice.
-            </Link>
-          </h1><br/>
-            <h1>I'm A <Link
-              to='/Work'
-              className="home--block__dev"
-              onMouseOver={this.revealBackgroundOnHover}
-              onMouseLeave={this.hideBackgroundOnOff}
-              onClick={this.handleClick}> Developer
-            </Link> & <Link
-              to='/Photography'
-              className="home--block__photo"
-              onMouseOver={this.revealBackgroundOnHover}
-              onMouseLeave={this.hideBackgroundOnOff}
-              onClick={this.handleClick}> Photographer.</Link>
+          <div className="home--block--wrapper nav-page__main-wrapper">
+            <h1>
+              <span>Hello, I'm </span>
+              {this.renderLink('Fabrice.', 'link-item home--block__name', '/About')}
             </h1>
             <br/>
-            <h1>Read my <Link
-            to='/Blog'
-            className="home--block__blog"
-            onMouseOver={this.revealBackgroundOnHover}
-            onMouseLeave={this.hideBackgroundOnOff}
-            onClick={this.handleClick}> Thoughts</Link> & <a href="https://twitter.com/fabriceBT" target="_blank" className="home--block__twitter"
-            onMouseOver={this.revealBackgroundOnHover}
-            onMouseLeave={this.hideBackgroundOnOff}
-            onClick={this.handleClick}
-            onClick={this.handleClick}>Tweets.</a>
-            </h1><br/>
-            <h1>Lets Create, <a href='mailto:developer@fabricebt.com' className="home--block__email">developer@fabricebt.com</a></h1><br/>
+            <h1>
+              <span>I'm A </span>
+              {this.renderLink('Developer', 'link-item home--block__dev', '/Work')}
+              <span>&</span>
+              {this.renderLink('Photographer.', 'link-item home--block__photo', '/Photography')}
+            </h1>
+            <br/>
+            <h1>
+              <span>Read my </span>
+              {this.renderLink('Thoughts', 'link-item home--block__blog', '/Blog')}
+              <span>&</span>
+              <a href="https://twitter.com/fabriceBT" target="_blank" className="link-item home--block__twitter"
+                onMouseOver={this.revealBackgroundOnHover}
+                onMouseLeave={this.hideBackgroundOnOff}
+                onClick={this.handleClick}>Tweets.</a>
+            </h1>
+            <br/>
+            <h1>
+              <span>Lets Create, </span>
+              <a href='mailto:developer@fabricebt.com' className="link-item home--block__email">developer@fabricebt.com</a>
+            </h1>
+            <br/>
           </div>
           <div className="home--block--offHome">
             <Link to='/About'>About</Link>
             <Link to='/Work'>Developer</Link>
             <Link to='/Photography'>Photographer</Link>
             <Link to='/Blog'>Blog</Link>
-            <a href='mailto:developer@fabricebt.com' className='home--block--mobile__email'>Email</a>
+            <a href='mailto:developer@fabricebt.com' className='link-item home--block--mobile__email'>Email</a>
           </div>
           <div className="home--block__slider"></div>
         </div>

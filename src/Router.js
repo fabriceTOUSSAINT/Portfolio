@@ -5,20 +5,18 @@ import {
   Link
 } from 'react-router-dom';
 
-import Home from './modules/Home/Home.js';
-import About from './modules/About';
-import Work from './modules/Work';
-import Photography from './modules/Photography';
+import NavPageWrapper from './modules/NavPageWrapper';
+import About from './pages/About';
+import Work from './pages/Work';
+import Photography from './pages/Photography';
 
 export default (
     <Router>
-      <div className="main">
-          <Home />
-          {/* <Route path='/' component={Home}> */}
-          <Route path='/About' component={About} />
-          <Route path='/Work' component={Work} />
-          <Route path='/Photography' component={Photography} />
-        {/* </Route> */}
-      </div>
+        <div className="main">
+            <NavPageWrapper />
+            <Route path='/About' component={About} />
+            <Route path='/Work' component={Work} />
+            <Route path='/Photography' component={Photography} />
+        </div>
     </Router>
 );
