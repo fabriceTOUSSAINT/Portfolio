@@ -6,15 +6,9 @@ import Velocity from 'velocity-animate';
 import logo from '../../assets/images/fab-logo-wht.png'
 
 class Home extends React.Component {
-  constructor(props){
-    super(props);
-
-    // determine if current page is home or not, to properly display the navigation/sidebar
-    this.state = {
-      onHome: true //default
-    };
-    this.handleClick = this.handleClick.bind(this);
-  }
+  state = {
+    onHome: true
+  };
 
   componentDidMount() {
     //preLoad background images
@@ -33,7 +27,7 @@ class Home extends React.Component {
     });
   }
 
-  handleClick(e) {
+  handleClick = (e) => {
     const whiteSlider = document.getElementsByClassName('home--block__slider')[0];
     const imageBackground = document.getElementsByClassName('home')[0];
     const fullNav = document.getElementsByClassName('home--block--wrapper')[0];
@@ -143,21 +137,59 @@ class Home extends React.Component {
 
   clickSlideNavtoPageNav = (e) => {
     this.setState({onHome:false});
-    const imageBackground = document.getElementsByClassName('home')[0];
-    const whiteSlider = document.getElementsByClassName('home--block__slider')[0];
 
+    // Transform BG Slider
+    const imageBackground = document.querySelector('.home');
+    const whiteSlider = document.querySelector('.home--block__slider');
     let screenW = window.innerWidth;
+
     //FIXME: Hack for full slide off screen
     if(screenW < 1200) {screenW = 1200;}
-    // debugger;
     Velocity(whiteSlider, {width: '200px'});
     // Once i figure out exact photos i will use, include their dimension on the image itself
     // pull image name, regex for size and follow this
     // http://stackoverflow.com/questions/21127479/getting-the-height-of-a-background-image-resized-using-background-size-contain
     Velocity(imageBackground, {backgroundPositionX: -screenW}, [0.82, 0, 0.44, 0.93]);
-    // Velocity(pageNav, {
-    //   opacity: '1',
-    // });
+
+    // Transform menu itmes
+    const navLines = document.querySelectorAll('.home--block__line span');
+    const navLinkItems = document.querySelectorAll('.home--block__line .link-item');
+    const homeBlockLine = document.querySelector('.home--block__line');
+    const homeBlockWrapperHeight = document.querySelector('.home--block--wrapper');
+    const keepHBWHeight = `${homeBlockWrapperHeight.offsetHeight}px`;
+
+    function offset(el) {
+      debugger;
+      // FIXME: NEED to find correct logic to set Link element height to prepeare for animation to second nav
+      const parentElOffsetHeight = el.parentElement.parentElement.offsetTop;
+        var rect = el.getBoundingClientRect(),
+        scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        return rect.top + scrollTop + parentElOffsetHeight
+    }
+
+    navLines.forEach((span, index) => {
+      let top = `${offset(navLinkItems[index])}px`;
+      let left = `${navLinkItems[index].offsetLeft}px`;
+      console.log(offset(navLinkItems[index]), '<====top');
+
+      span.style.opacity = '0'; //Hide unimportant text
+      // console.log(offset(navLinkItems[index]));
+      // debugger;
+
+      // dress new nav text
+      navLinkItems[index].style.left = left;
+      navLinkItems[index].style.top = top;
+      navLinkItems[index].style.position = 'absolute';
+      navLinkItems[index].style.color = '#141414';
+      navLinkItems[index].style.fontSize = '22px';
+      navLinkItems[index].style.textDecoration = 'none';
+
+      homeBlockLine.style.display = 'block';
+      span.style.display = 'none';
+      homeBlockWrapperHeight.style.height = keepHBWHeight;
+      // debugger;
+    })
+
   }
 
   render() {
@@ -175,23 +207,23 @@ class Home extends React.Component {
             <img src={logo} className="logo" />
           </Link>
           <div className="home--block--wrapper nav-page__main-wrapper">
-            <h1>
+            <h1 className='home--block__line'>
               <span>Hello, I'm </span>
               {this.renderLink('Fabrice.', '/About', 'home--block__name')}
             </h1>
-            <h1>
+            <h1 className='home--block__line'>
               <span>I'm A </span>
               {this.renderLink('Developer', '/Work', 'home--block__dev')}
               <span> & </span>
               {this.renderLink('Photographer.', '/Photography', 'home--block__photo')}
             </h1>
-            <h1>
+            <h1 className='home--block__line'>
               <span>Read my </span>
               {this.renderLink('Thoughts', '/Blog', 'home--block__blog')}
               <span> & </span>
               {this.renderLink('Tweets.', 'https://twitter.com/fabriceBT', 'home--block__twitter')}
             </h1>
-            <h1>
+            <h1 className='home--block__line'>
               <span>Lets Create, </span>
               {this.renderLink('developer@fabricebt.com', 'mailto:developer@fabricebt.com', 'home--block__email')}
             </h1>

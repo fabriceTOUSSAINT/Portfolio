@@ -21,6 +21,9 @@
         background-repeat: repeat;
     }
 
+    .link-item {
+        transition: all ease .5s;
+    }
     &-slide{
         background-position-x: 0px;
         transition: background-position-x ease .4s;
@@ -44,7 +47,7 @@
             }
         }
 
-        h1 {
+        &__line {
             background-color: #fff;
             padding: 15px;
             padding-right: 50px;
