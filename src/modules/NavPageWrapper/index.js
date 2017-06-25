@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Velocity from 'velocity-animate';
 
 //Images
@@ -14,6 +14,23 @@ class Home extends React.Component {
       onHome: true //default
     };
     this.handleClick = this.handleClick.bind(this);
+  }
+
+  componentDidMount() {
+    //preLoad background images
+    const imagePreloadSpans = document.querySelectorAll('.link-item');
+    let tempRoot = document.querySelector('#root');
+    let imagePreload;
+
+    imagePreloadSpans.forEach((span) => {
+      let elem = document.createElement('div');
+      elem.setAttribute('height', '1');
+      elem.setAttribute('width', '1');
+      elem.setAttribute('posittion', 'absolute');
+      imagePreload = span.classList.value.replace('link-item home--block__', '');
+      elem.className = `home-${imagePreload}`;
+      tempRoot.appendChild(elem);
+    });
   }
 
   handleClick(e) {
@@ -63,25 +80,25 @@ class Home extends React.Component {
   }
 
   revealBackgroundOnHover(e) {
-    const class_name = e.target.className;
-    const home = document.getElementsByClassName('home')[0];
+    const class_name = e.target.id;
+    const home = document.querySelector('.home');
 
     // Assign classname to the parent tag based off of what link is hovered
     // class determines which background image to display
     switch(class_name) {
-      case 'link-item home--block__dev':
+      case 'home--block__dev':
         home.className = 'home home-slide home-dev';
         break;
-      case 'link-item home--block__photo':
+      case 'home--block__photo':
         home.className = 'home home-slide home-photo';
         break;
-      case 'link-item home--block__name':
+      case 'home--block__name':
         home.className = 'home home-slide home-name';
         break;
-      case 'link-item home--block__blog':
+      case 'home--block__blog':
         home.className = 'home home-slide home-blog';
         break;
-      case 'link-item home--block__twitter':
+      case 'home--block__twitter':
         home.className = 'home home-slide home-twitter';
         break;
       default:
@@ -100,27 +117,28 @@ class Home extends React.Component {
     homePage.classList.remove('home--block__slider--slide');
   }
 
+  // render <Link /> or <a /> tags attached with needed event functions
   renderLink = (string, dest, id) => {
     const linkClass = `link-item ${id}`;
-    const component = /\b(http|https|mailto)/.test(dest) ?
+    const renderComponent = /\b(http|https|mailto)/.test(dest) ?
     <a
       href={dest}
       target='_blank'
-      id
+      id={id}
       className={linkClass}
       onMouseOver={this.revealBackgroundOnHover}
       onMouseLeave={this.hideBackgroundOnOff}
       onClick={this.clickSlideNavtoPageNav}> {string}
     </a> : <Link
              to={dest}
-             id
+             id={id}
              className={linkClass}
              onMouseOver={this.revealBackgroundOnHover}
              onMouseLeave={this.hideBackgroundOnOff}
              onClick={this.clickSlideNavtoPageNav}> {string}
            </Link>;
 
-    return component;
+    return renderComponent;
   }
 
   clickSlideNavtoPageNav = (e) => {
@@ -161,26 +179,22 @@ class Home extends React.Component {
               <span>Hello, I'm </span>
               {this.renderLink('Fabrice.', '/About', 'home--block__name')}
             </h1>
-            <br/>
             <h1>
               <span>I'm A </span>
               {this.renderLink('Developer', '/Work', 'home--block__dev')}
-              <span>&</span>
+              <span> & </span>
               {this.renderLink('Photographer.', '/Photography', 'home--block__photo')}
             </h1>
-            <br/>
             <h1>
               <span>Read my </span>
               {this.renderLink('Thoughts', '/Blog', 'home--block__blog')}
-              <span>&</span>
+              <span> & </span>
               {this.renderLink('Tweets.', 'https://twitter.com/fabriceBT', 'home--block__twitter')}
             </h1>
-            <br/>
             <h1>
               <span>Lets Create, </span>
               {this.renderLink('developer@fabricebt.com', 'mailto:developer@fabricebt.com', 'home--block__email')}
             </h1>
-            <br/>
           </div>
           <div className="home--block--offHome">
             <Link to='/About'>About</Link>
