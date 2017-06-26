@@ -135,9 +135,49 @@ class Home extends React.Component {
     return renderComponent;
   }
 
+  dressNavPosition = () => {
+      // Transform menu itmes
+      const navLines = document.querySelectorAll('.home--block__line span');
+      const navLinkItems = document.querySelectorAll('.home--block__line .link-item');
+      const homeBlockLine = document.querySelector('.home--block__line');
+      const homeBlockWrapperHeight = document.querySelector('.home--block--wrapper');
+      const keepHBWHeight = `${homeBlockWrapperHeight.offsetHeight}px`;
+
+      let containerHeight = `${navLinkItems[0].parentElement.parentElement.offsetHeight}px`;
+      navLinkItems[0].parentElement.parentElement.style.height = containerHeight;
+
+      // convert link text to stand alone in the current posiotion it is in
+      for (let index = navLines.length - 1; index >= 0; index--) {
+        let top = `${navLinkItems[index].offsetTop + 2}px`; //
+        let left = `${navLinkItems[index].offsetLeft}px`;
+
+        // dress new nav text
+        navLinkItems[index].style.left = left;
+        navLinkItems[index].style.top = top;
+        navLinkItems[index].style.position = 'absolute';
+        navLinkItems[index].style.color = '#141414';
+        navLinkItems[index].style.fontSize = '22px';
+        navLinkItems[index].style.textDecoration = 'none';
+        homeBlockLine.style.display = 'block';
+        homeBlockWrapperHeight.style.height = keepHBWHeight;
+      }
+
+      // begin hiding unimporntant text, once it dissapears then we'll remove it from DOM
+      navLines.forEach((span) => {
+        span.id = 'dissapear';
+        span.style.opacity = '0'; //Hide unimportant text
+      });
+
+      let spanHide = document.querySelectorAll('#dissapear');
+      spanHide.forEach((span) => {
+        span.style.display = 'none';
+      });
+  }
+
   clickSlideNavtoPageNav = (e) => {
     this.setState({onHome:false});
-
+    this.dressNavPosition();
+    
     // Transform BG Slider
     const imageBackground = document.querySelector('.home');
     const whiteSlider = document.querySelector('.home--block__slider');
@@ -150,45 +190,6 @@ class Home extends React.Component {
     // pull image name, regex for size and follow this
     // http://stackoverflow.com/questions/21127479/getting-the-height-of-a-background-image-resized-using-background-size-contain
     Velocity(imageBackground, {backgroundPositionX: -screenW}, [0.82, 0, 0.44, 0.93]);
-
-    // Transform menu itmes
-    const navLines = document.querySelectorAll('.home--block__line span');
-    const navLinkItems = document.querySelectorAll('.home--block__line .link-item');
-    const homeBlockLine = document.querySelector('.home--block__line');
-    const homeBlockWrapperHeight = document.querySelector('.home--block--wrapper');
-    const keepHBWHeight = `${homeBlockWrapperHeight.offsetHeight}px`;
-
-    function offset(el) {
-      debugger;
-      // FIXME: NEED to find correct logic to set Link element height to prepeare for animation to second nav
-      const parentElOffsetHeight = el.parentElement.parentElement.offsetTop;
-        var rect = el.getBoundingClientRect(),
-        scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        return rect.top + scrollTop + parentElOffsetHeight
-    }
-
-    navLines.forEach((span, index) => {
-      let top = `${offset(navLinkItems[index])}px`;
-      let left = `${navLinkItems[index].offsetLeft}px`;
-      console.log(offset(navLinkItems[index]), '<====top');
-
-      span.style.opacity = '0'; //Hide unimportant text
-      // console.log(offset(navLinkItems[index]));
-      // debugger;
-
-      // dress new nav text
-      navLinkItems[index].style.left = left;
-      navLinkItems[index].style.top = top;
-      navLinkItems[index].style.position = 'absolute';
-      navLinkItems[index].style.color = '#141414';
-      navLinkItems[index].style.fontSize = '22px';
-      navLinkItems[index].style.textDecoration = 'none';
-
-      homeBlockLine.style.display = 'block';
-      span.style.display = 'none';
-      homeBlockWrapperHeight.style.height = keepHBWHeight;
-      // debugger;
-    })
 
   }
 
