@@ -135,10 +135,9 @@ class Home extends React.Component {
     return renderComponent;
   }
 
-  dressNavPosition = () => {
+  dressNavPosition = (navLinkItems) => {
       // Transform menu itmes
       const navLines = document.querySelectorAll('.home--block__line span');
-      const navLinkItems = document.querySelectorAll('.home--block__line .link-item');
       const homeBlockLine = document.querySelector('.home--block__line');
       const homeBlockWrapperHeight = document.querySelector('.home--block--wrapper');
       const keepHBWHeight = `${homeBlockWrapperHeight.offsetHeight}px`;
@@ -176,8 +175,19 @@ class Home extends React.Component {
 
   clickSlideNavtoPageNav = (e) => {
     this.setState({onHome:false});
-    this.dressNavPosition();
-    
+
+    const navLinkItems = document.querySelectorAll('.home--block__line .link-item');
+    const homeBlockLine = document.querySelectorAll('.home--block__line');
+    homeBlockLine.forEach(n => {
+      n.style.backgroundColor = 'rgba(0,0,0,0)';
+    });
+    this.dressNavPosition(navLinkItems);
+    navLinkItems.forEach((nav, index) => {
+      let sideTopDist = `${35 * (index + 1) + 100}px`;
+      nav.style.left = '20px';
+      nav.style.top = sideTopDist;
+    });
+
     // Transform BG Slider
     const imageBackground = document.querySelector('.home');
     const whiteSlider = document.querySelector('.home--block__slider');
