@@ -158,7 +158,6 @@ class NavPageWrapper extends React.Component {
         let left = `${navLinkItems[index].offsetLeft}px`;
 
         // dress new nav text
-        debugger;
         navLinkItems[index].style.left = left;
         navLinkItems[index].style.top = top;
         navLinkItems[index].style.position = 'absolute';
