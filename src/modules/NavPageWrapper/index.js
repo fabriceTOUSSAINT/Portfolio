@@ -1,3 +1,4 @@
+// @flow
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Velocity from 'velocity-animate';
@@ -5,7 +6,9 @@ import Velocity from 'velocity-animate';
 //Images
 import logo from '../../assets/images/fab-logo-wht.png'
 
-class Home extends React.Component {
+type State = { onHome: boolean};
+
+class NavPageWrapper extends React.Component {
   state = {
     onHome: true
   };
@@ -21,61 +24,65 @@ class Home extends React.Component {
       elem.setAttribute('height', '1');
       elem.setAttribute('width', '1');
       elem.setAttribute('posittion', 'absolute');
-      imagePreload = span.classList.value.replace('link-item home--block__', '');
+      // This assumes that className will be like 'link-item home--block__name'
+      imagePreload = span.className.replace('link-item home--block__', '');
       elem.className = `home-${imagePreload}`;
+      // $FlowFixMe - This looks like a flow bug below.
       tempRoot.appendChild(elem);
     });
   }
 
-  handleClick = (e) => {
-    const whiteSlider = document.getElementsByClassName('home--block__slider')[0];
-    const imageBackground = document.getElementsByClassName('home')[0];
-    const fullNav = document.getElementsByClassName('home--block--wrapper')[0];
-    const pageNav = document.getElementsByClassName('home--block--offHome')[0];
+  // handleClick = (e: Object) => {
+  //   debugger;
+  //   const whiteSlider = document.getElementsByClassName('home--block__slider')[0];
+  //   const imageBackground = document.getElementsByClassName('home')[0];
+  //   const fullNav = document.getElementsByClassName('home--block--wrapper')[0];
+  //   const pageNav = document.getElementsByClassName('home--block--offHome')[0];
+  //
+  //   const linkItems = document.getElementsByClassName('link-item');
+  //   const Fabrice = document.getElementsByClassName('home--block__name')[0];
+  //   const fadeItems = document.querySelectorAll('.home--block--wrapper span');
+  //   for (let x = 0; x < fadeItems.length; x++) {
+  //     fadeItems[x].style.opacity = '0';
+  //     setTimeout(() => {
+  //       fadeItems[x].style.display = 'none';
+  //     }, 2000);
+  //   };
+  //   debugger;
+  //   Fabrice.style.display = 'block';
+  //   Fabrice.style.
+  //   Velocity(Fabrice, {
+  //     translateX: '20px',
+  //   }, [0.82, 0, 0.44, 0.93])
+  //   // debugger;
+  //
+  //   // Velocity(fullNav, {
+  //   //   translateX: '-1500px',
+  //   // }, [0.82, 0, 0.44, 0.93]);
+  //   this.setState({onHome:false});
+  //   let screenW = window.innerWidth;
+  //   //FIXME: Hack for full slide off screen
+  //   if(screenW < 1200) {screenW = 1200;}
+  //   // debugger;
+  //   Velocity(whiteSlider, {width: '200px'});
+  //   // Once i figure out exact photos i will use, include their dimension on the image itself
+  //   // pull image name, regex for size and follow this
+  //   // http://stackoverflow.com/questions/21127479/getting-the-height-of-a-background-image-resized-using-background-size-contain
+  //   Velocity(imageBackground, {backgroundPositionX: -screenW}, [0.82, 0, 0.44, 0.93]);
+  //   // Velocity(fullNav,{
+  //   //   // translateX:'-1500',
+  //   //   translateX:'-20',
+  //   // }, [0.82, 0, 0.44, 0.93]);
+  //   Velocity(pageNav, {
+  //     opacity: '1',
+  //   });
+  //
+  // }
 
-    const linkItems = document.getElementsByClassName('link-item');
-    const Fabrice = document.getElementsByClassName('home--block__name')[0];
-    const fadeItems = document.querySelectorAll('.home--block--wrapper span');
-    for (let x = 0; x < fadeItems.length; x++) {
-      fadeItems[x].style.opacity = '0';
-      setTimeout(() => {
-        fadeItems[x].style.display = 'none';
-      }, 2000);
-    };
-    debugger;
-    Fabrice.style.display = 'block';
-    Fabrice.style.
-    Velocity(Fabrice, {
-      translateX: '20px',
-    }, [0.82, 0, 0.44, 0.93])
-    // debugger;
-
-    // Velocity(fullNav, {
-    //   translateX: '-1500px',
-    // }, [0.82, 0, 0.44, 0.93]);
-    this.setState({onHome:false});
-    let screenW = window.innerWidth;
-    //FIXME: Hack for full slide off screen
-    if(screenW < 1200) {screenW = 1200;}
-    // debugger;
-    Velocity(whiteSlider, {width: '200px'});
-    // Once i figure out exact photos i will use, include their dimension on the image itself
-    // pull image name, regex for size and follow this
-    // http://stackoverflow.com/questions/21127479/getting-the-height-of-a-background-image-resized-using-background-size-contain
-    Velocity(imageBackground, {backgroundPositionX: -screenW}, [0.82, 0, 0.44, 0.93]);
-    // Velocity(fullNav,{
-    //   // translateX:'-1500',
-    //   translateX:'-20',
-    // }, [0.82, 0, 0.44, 0.93]);
-    Velocity(pageNav, {
-      opacity: '1',
-    });
-
-  }
-
-  revealBackgroundOnHover(e) {
+  revealBackgroundOnHover(e: Object) {
+    e.preventDefault();
     const class_name = e.target.id;
-    const home = document.querySelector('.home');
+    const home = document.querySelector('.home') || {className: ''};
 
     // Assign classname to the parent tag based off of what link is hovered
     // class determines which background image to display
@@ -112,7 +119,7 @@ class Home extends React.Component {
   }
 
   // render <Link /> or <a /> tags attached with needed event functions
-  renderLink = (string, dest, id) => {
+  renderLink = (string: string, dest: string, id: string): Object => {
     const linkClass = `link-item ${id}`;
     const renderComponent = /\b(http|https|mailto)/.test(dest) ?
     <a
@@ -135,11 +142,11 @@ class Home extends React.Component {
     return renderComponent;
   }
 
-  dressNavPosition = (navLinkItems) => {
-      // Transform menu itmes
+  dressNavPosition = (navLinkItems: Object): void => {
+      // Transform menu items
       const navLines = document.querySelectorAll('.home--block__line span');
       const homeBlockLine = document.querySelector('.home--block__line');
-      const homeBlockWrapperHeight = document.querySelector('.home--block--wrapper');
+      const homeBlockWrapperHeight = document.querySelector('.home--block--wrapper') || {offsetHeight: 0};
       const keepHBWHeight = `${homeBlockWrapperHeight.offsetHeight}px`;
 
       let containerHeight = `${navLinkItems[0].parentElement.parentElement.offsetHeight}px`;
@@ -151,13 +158,16 @@ class Home extends React.Component {
         let left = `${navLinkItems[index].offsetLeft}px`;
 
         // dress new nav text
+        debugger;
         navLinkItems[index].style.left = left;
         navLinkItems[index].style.top = top;
         navLinkItems[index].style.position = 'absolute';
         navLinkItems[index].style.color = '#141414';
         navLinkItems[index].style.fontSize = '22px';
         navLinkItems[index].style.textDecoration = 'none';
+        //$FlowFixMe
         homeBlockLine.style.display = 'block';
+        //$FlowFixMe
         homeBlockWrapperHeight.style.height = keepHBWHeight;
       }
 
@@ -173,7 +183,7 @@ class Home extends React.Component {
       });
   }
 
-  clickSlideNavtoPageNav = (e) => {
+  clickSlideNavtoPageNav = (e: Object): void => {
     this.setState({onHome:false});
 
     const navLinkItems = document.querySelectorAll('.home--block__line .link-item');
@@ -253,4 +263,4 @@ class Home extends React.Component {
   }
 }
 
-export default Home;
+export default NavPageWrapper;

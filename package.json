@@ -4,10 +4,13 @@
   "private": true,
   "devDependencies": {
     "autoprefixer": "6.7.2",
+    "babel-cli": "^6.24.1",
     "babel-core": "6.22.1",
     "babel-eslint": "7.1.1",
     "babel-jest": "18.0.0",
     "babel-loader": "6.2.10",
+    "babel-plugin-transform-flow-strip-types": "^6.22.0",
+    "babel-preset-flow": "^6.23.0",
     "babel-preset-react-app": "^2.1.1",
     "babel-runtime": "^6.20.0",
     "case-sensitive-paths-webpack-plugin": "1.1.4",
@@ -27,17 +30,19 @@
     "extract-text-webpack-plugin": "1.0.1",
     "file-loader": "0.10.0",
     "filesize": "3.3.0",
+    "flow-bin": "^0.48.0",
     "fs-extra": "0.30.0",
     "gzip-size": "3.0.0",
     "html-webpack-plugin": "2.24.0",
     "http-proxy-middleware": "0.17.3",
-    "jest": "18.1.0",
+    "jest": "^20.0.4",
     "json-loader": "0.5.4",
     "node-sass": "^4.5.0",
     "object-assign": "4.1.1",
     "postcss-loader": "1.2.2",
     "promise": "7.1.1",
     "react-dev-utils": "^0.5.1",
+    "react-test-renderer": "^15.6.1",
     "recursive-readdir": "2.1.1",
     "sass-loader": "^6.0.2",
     "strip-ansi": "3.0.1",
@@ -49,6 +54,7 @@
     "whatwg-fetch": "2.0.2"
   },
   "dependencies": {
+    "global": "^4.3.2",
     "install": "^0.8.7",
     "normalize-scss": "^6.0.0",
     "npm": "^4.4.1",
@@ -61,6 +67,8 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
+    "babel": "babel src/ -d lib/",
+    "prepublish": "yarn run babel",
     "test": "node scripts/test.js --env=jsdom"
   },
   "jest": {
