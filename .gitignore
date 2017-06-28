@@ -3,3 +3,4 @@ yarn.lock
 .vscode
 build
 .sass-lint.yml
+lib/
