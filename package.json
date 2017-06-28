@@ -56,7 +56,7 @@
     "whatwg-fetch": "2.0.2"
   },
   "dependencies": {
-    "babel-preset-stage-0": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
     "global": "^4.3.2",
     "install": "^0.8.7",
     "normalize-scss": "^6.0.0",
