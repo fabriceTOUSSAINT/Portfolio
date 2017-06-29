@@ -123,14 +123,9 @@ class FlexNav extends React.Component {
         let left = `${navLinkItems[index].offsetLeft}px`;
 
         flexNavLinks[navLinkItems[index].id] = {top: top, left: left};
-
         // dress new nav text
         navLinkItems[index].style.left = left;
         navLinkItems[index].style.top = top;
-        // navLinkItems[index].style.position = 'absolute';
-        // navLinkItems[index].style.color = '#141414';
-        // navLinkItems[index].style.fontSize = '22px';
-        // navLinkItems[index].style.textDecoration = 'none';
       }
       //$FlowFixMe
       homeBlockLine.style.display = 'block';
@@ -142,37 +137,26 @@ class FlexNav extends React.Component {
         fullPageLinkPos: flexNavLinks
       });
 
+      const revNavLinkItems = [].slice.call(navLinkItems, 0).reverse();
+      const revNavlinkLen = revNavLinkItems.length - 1;
+
       // begin hiding unimporntant text, once it dissapears then we'll remove it from DOM
-      navLines.forEach((span) => {
+      navLines.forEach((span, index) => {
         span.id = 'dissapear';
         span.style.opacity = '0'; //Hide unimportant text
-        // setTimeout(() => {span.style.display = 'none'}, 0);
-      });
-      // debugger;
-
-      const revNodeList = [].slice.call(navLines, 0).reverse();
-      // debugger;
-      revNodeList.forEach((span, index) => {
-        // debugger;
-        const linkSize = document.querySelectorAll('#dissapear').length - 1;
-        navLinkItems[(linkSize - index)].style.position = 'absolute';
+        revNavLinkItems[revNavlinkLen - index].style.position = 'absolute';
         span.style.display = 'none';
-      })
-
-      // let spanHide = document.querySelectorAll('#dissapear');
-      // const spanLength = spanHide.length;
-      // spanHide.forEach((span, index) => {
-      //   debugger;
-      //   navLinkItems[index].style.position = 'absolute';
-      //   span.style.display = 'none';
-      // });
-
-      navLinkItems.forEach((nav, index) => {
-        nav.classList.add('link-item--shift');
-        let sideTopDist = `${35 * (index + 1) + 100}px`;
-        nav.style.left = '20px';
-        nav.style.top = sideTopDist;
       });
+
+      //setTimeout Hack, first element doesn't seem to have above styles applied before we change them below.
+      setTimeout(() => {
+        navLinkItems.forEach((nav, index) => {
+          nav.classList.add('link-item--shift');
+          let sideTopDist = `${35 * (index + 1) + 100}px`;
+          nav.style.left = '20px';
+          nav.style.top = sideTopDist;
+        });
+      }, 100);
   }
 
   toggleNavShift = (e: Object, reset: boolean): void => {
@@ -186,13 +170,11 @@ class FlexNav extends React.Component {
 
     if (this.state.isFullPageNav) {
       homeBlockLine.forEach(line => {
-        console.log(line);
         line.style.backgroundColor = 'rgba(0,0,0,0)';
         line.style.height = 'inherit';
       });
 
       this.dressNavPosition(navLinkItems);
-
       this.setState((state) => {
         return {isFullPageNav: false}
       });

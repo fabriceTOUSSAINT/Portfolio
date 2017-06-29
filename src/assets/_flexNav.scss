@@ -29,11 +29,9 @@
     &--twitter {color: #8EB8E5;}
 
     .link-item {
-        transition: all ease 20s;
+        transition: all ease .9s;
 
         &--shift {
-            // position: absolute;
-            // left: 20px;
             color: #141414;
             font-size: 22px;
             text-decoration: none;
