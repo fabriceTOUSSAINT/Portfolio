@@ -1,10 +1,10 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import NavPageWrapper from '../index';
+import FlexNav from '../index';
 
 it('renders correctly', () => {
   const component = renderer.create(
-    <NavPageWrapper />
+    <FlexNav />
   ).toJSON();
   expect(component).toMatchSnapshot();
 });
