@@ -9,14 +9,16 @@ import logo from '../../assets/images/fab-logo-wht.png'
 type State = {
   isFullPageNav: boolean,
   fullPageWrapperHeight: string,
-  fpLinkPos: Array<mixed>, // {a: {top: 100, left: 45}, b: {...}}
+  fullPageLinkPos: Array<mixed>, // {a: {top: 100, left: 45}, b: {...}}
+  navKeys: Array<string>
 };
 
 class FlexNav extends React.Component {
   state = {
     isFullPageNav: true,
     fullPageWrapperHeight: '200px',
-    fullPageLinkPos:[]
+    fullPageLinkPos:[],
+    navKeys: []
   };
 
   shouldComponentUpdate(nextProps: Object, nextState: Object) {
@@ -108,7 +110,7 @@ class FlexNav extends React.Component {
   dressNavPosition = (navLinkItems: Object): void => {
       // Transform menu items
       const navLines = document.querySelectorAll('.flex-nav__line span');
-      const homeBlockLine = document.querySelector('.flex-nav__line');
+      const homeBlockLine = document.querySelectorAll('.flex-nav__line');
       const homeBlockWrapperHeight = document.querySelector('.flex-nav__container--wrapper') || {offsetHeight: 0};
       const keepHBWHeight = `${homeBlockWrapperHeight.offsetHeight}px`;
 
@@ -116,25 +118,28 @@ class FlexNav extends React.Component {
       navLinkItems[0].parentElement.parentElement.style.height = containerHeight;
 
       let flexNavLinks = [];
-
+      let navKeys = [];
       // convert link text to stand alone in the current position it is in
       for (let index = navLines.length - 1; index >= 0; index--) {
         let top = `${navLinkItems[index].offsetTop + 2}px`; //
         let left = `${navLinkItems[index].offsetLeft}px`;
-
+        navKeys.push(navLinkItems[index].id);
         flexNavLinks[navLinkItems[index].id] = {top: top, left: left};
         // dress new nav text
         navLinkItems[index].style.left = left;
         navLinkItems[index].style.top = top;
       }
-      //$FlowFixMe
-      homeBlockLine.style.display = 'block';
+      // debugger;
+      // homeBlockLine.forEach(line => {
+      //   // line.style.display = 'block';
+      // })
       //$FlowFixMe
       homeBlockWrapperHeight.style.height = keepHBWHeight;
 
       this.setState({
         fullPageWrapperHeight: keepHBWHeight,
-        fullPageLinkPos: flexNavLinks
+        fullPageLinkPos: flexNavLinks,
+        navKeys: navKeys,
       });
 
       const revNavLinkItems = [].slice.call(navLinkItems, 0).reverse();
@@ -159,7 +164,50 @@ class FlexNav extends React.Component {
       }, 100);
   }
 
-  toggleNavShift = (e: Object, reset: boolean): void => {
+  undressNavPosition = (navLinkItems: Object): void => {
+    const navLines = document.querySelectorAll('.flex-nav__line span');
+    const linkPositionArr = this.state.fullPageLinkPos;
+    const linkKeys = this.state.navKeys;
+    const cleanNavLinkItems = [];
+
+    // clean links for iteration
+    navLinkItems.forEach(item => {
+      cleanNavLinkItems[item.id] = item;
+    });
+
+    // reset fullpage positions and styles
+    linkKeys.forEach(link => {
+      let top = linkPositionArr[link].top;
+      let left = linkPositionArr[link].left;
+      cleanNavLinkItems[link].style.left = left;
+      cleanNavLinkItems[link].style.top = top;
+      // cleanNavLinkItems[link].style.position = 'static';
+      cleanNavLinkItems[link].classList.remove('link-item--shift');
+    });
+
+    linkKeys.forEach(link => {
+      // cleanNavLinkItems[link].style.position = 'initial';
+    });
+
+    navLines.forEach(span => {
+      span.style.display = 'inline';
+    });
+    setTimeout(() => {
+      linkKeys.forEach(link => {
+        cleanNavLinkItems[link].style.position = 'static';
+      })
+    }, 600);
+
+    setTimeout(() => {
+      navLines.forEach(span => {
+        span.style.opacity = '1';
+      });
+    }, 100);
+
+    // debugger;
+  }
+
+  toggleNavShift = (VOID: any, reset: boolean): void => {
     // this.setState({isFullPageNav:false});
     const doNavShiftReset = reset;
     const navLinkItems = document.querySelectorAll('.link-item');
@@ -171,7 +219,7 @@ class FlexNav extends React.Component {
     if (this.state.isFullPageNav) {
       homeBlockLine.forEach(line => {
         line.style.backgroundColor = 'rgba(0,0,0,0)';
-        line.style.height = 'inherit';
+        // line.style.height = 'inherit';
       });
 
       this.dressNavPosition(navLinkItems);
@@ -188,14 +236,19 @@ class FlexNav extends React.Component {
     }
 
     else if (doNavShiftReset && !this.state.isFullPageNav) {
-      Velocity(imageBackground, {backgroundPositionX: 'initial'}, [0.82, 0, 0.44, 0.93]);
-      Velocity(whiteSlider, {width: 'initial'});
+      this.setState((state) => {
+        return {isFullPageNav: true}
+      });
 
+      Velocity(imageBackground, {backgroundPositionX: 'initial'}, [0.82, 0, 0.44, 0.93]);
+      Velocity(whiteSlider, {width: '100%'});
+      this.undressNavPosition(navLinkItems);
     }
 
   }
 
   render() {
+    console.log(this.state, '<=====');
     return (
       <div className="flex-nav">
         <div className="flex-nav--left-border">
@@ -206,7 +259,7 @@ class FlexNav extends React.Component {
           <span />
         </div>
         <div className="flex-nav__container">
-          <Link to='/'>
+          <Link to='/' onClick={() => this.toggleNavShift(null, true)}>
             <img src={logo} onClick={this.toggleNavShift} className="logo" />
           </Link>
           <div className="flex-nav__container--wrapper">

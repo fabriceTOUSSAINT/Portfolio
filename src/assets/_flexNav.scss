@@ -29,7 +29,7 @@
     &--twitter {color: #8EB8E5;}
 
     .link-item {
-        transition: all ease .9s;
+        transition: all cubic-bezier(0.6, 0.32, 0.15, 0.99) 0.75s;
 
         &--shift {
             color: #141414;
@@ -117,4 +117,12 @@
     z-index: 10;
     left: 20px;
     right: 20px;
+}
+
+#dissapear {
+  opacity: 0;
+  // &Hide {
+    // display: none;
+  // }
+
 }
