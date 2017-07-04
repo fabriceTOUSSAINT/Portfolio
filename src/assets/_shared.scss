@@ -1,3 +1,15 @@
 ul {
   margin-top: 0;
 }
+
+.page {
+  background-color:$white;
+  height:100vh;
+  padding-left: 220px;
+  display: flex;
+  position: relative;
+
+  &__container {
+      padding: 40px;
+  }
+}

@@ -229,6 +229,7 @@ class FlexNav extends React.Component {
 
       //FIXME: Hack for full slide off screen
       Velocity(whiteSlider, {width: '200px'});
+      whiteSlider.style.boxShadow= 'rgba(0, 0, 0, 0.4) -3px 0px 20px';
       // Once i figure out exact photos i will use, include their dimension on the image itself
       // pull image name, regex for size and follow this
       // http://stackoverflow.com/questions/21127479/getting-the-height-of-a-background-image-resized-using-background-size-contain
@@ -251,6 +252,8 @@ class FlexNav extends React.Component {
   }
 
   render() {
+    const email = this.state.isFullPageNav ? 'developer@fabricebt.com' : 'Email';
+
     return (
       <div className="flex-nav">
         <div className="flex-nav--left-border">
@@ -289,8 +292,8 @@ class FlexNav extends React.Component {
             </h1>
             <h1 className='flex-nav__line'>
               <div className='flex-nav__line--wrapper'>
-                <span>Lets Create, </span>
-                {this.renderLink('developer@fabricebt.com', 'mailto:developer@fabricebt.com','flex-nav--email')}
+                <span>Lets create, </span>
+                {this.renderLink(email, 'mailto:developer@fabricebt.com','flex-nav--email')}
               </div>
             </h1>
           </div>
