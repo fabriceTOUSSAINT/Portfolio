@@ -241,14 +241,16 @@ class FlexNav extends React.Component {
       });
 
       Velocity(imageBackground, {backgroundPositionX: 'initial'}, [0.82, 0, 0.44, 0.93]);
-      Velocity(whiteSlider, {width: '100%'});
+      Velocity(whiteSlider, {width: '100%'}, [0.82, 0, 0.44, 0.93]);
+      // $(whiteSlider).attr('style', '');
+      // debugger;
+      // whiteSlider.style.cssText = '';
       this.undressNavPosition(navLinkItems);
     }
 
   }
 
   render() {
-    console.log(this.state, '<=====');
     return (
       <div className="flex-nav">
         <div className="flex-nav--left-border">
@@ -264,24 +266,32 @@ class FlexNav extends React.Component {
           </Link>
           <div className="flex-nav__container--wrapper">
             <h1 className='flex-nav__line'>
-              <span>Hello, I'm </span>
-              {this.renderLink('Fabrice.', '/About','flex-nav--name')}
+              <div className='flex-nav__line--wrapper'>
+                <span>Hello, I'm </span>
+                {this.renderLink('Fabrice.', '/About','flex-nav--name')}
+              </div>
             </h1>
             <h1 className='flex-nav__line'>
-              <span>I'm A </span>
-              {this.renderLink('Developer', '/Work','flex-nav--dev')}
-              <span> & </span>
-              {this.renderLink('Photographer.', '/Photography','flex-nav--photo')}
+              <div className='flex-nav__line--wrapper'>
+                <span>I'm A </span>
+                {this.renderLink('Developer', '/Work','flex-nav--dev')}
+                <span> & </span>
+                {this.renderLink('Photographer.', '/Photography','flex-nav--photo')}
+              </div>
             </h1>
             <h1 className='flex-nav__line'>
-              <span>Read my </span>
-              {this.renderLink('Thoughts', '/Blog','flex-nav--blog')}
-              <span> & </span>
-              {this.renderLink('Tweets.', 'https://twitter.com/fabriceBT','flex-nav--twitter')}
+              <div className='flex-nav__line--wrapper'>
+                <span>Read my </span>
+                {this.renderLink('Thoughts', '/Blog','flex-nav--blog')}
+                <span> & </span>
+                {this.renderLink('Tweets.', 'https://twitter.com/fabriceBT','flex-nav--twitter')}
+              </div>
             </h1>
             <h1 className='flex-nav__line'>
-              <span>Lets Create, </span>
-              {this.renderLink('developer@fabricebt.com', 'mailto:developer@fabricebt.com','flex-nav--email')}
+              <div className='flex-nav__line--wrapper'>
+                <span>Lets Create, </span>
+                {this.renderLink('developer@fabricebt.com', 'mailto:developer@fabricebt.com','flex-nav--email')}
+              </div>
             </h1>
           </div>
           <div className="flex-nav__slider"></div>

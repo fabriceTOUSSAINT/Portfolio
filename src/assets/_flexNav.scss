@@ -16,6 +16,7 @@
     &--bg-blog {background-image: url('images/sick.jpg');}
     &--bg-photo {background-image: url('images/homebg.jpg');}
     &--bg-twitter{
+        transition: background-position-x .4s !important; //hack probably because of background repeat
         background-image: url('images/flamezzz.gif');
         background-size: 150px;
         background-repeat: repeat;
@@ -40,17 +41,22 @@
 
     &--slide{
         background-position-x: 0px;
-        transition: background-position-x ease .4s;
+        transition: background-image .4s, background-position-x .4s;
+
+        // transition: background-position-x .4s;
+        // transition: background-image ease .4s;
     }
 
     &__line {
-        background-color: #fff;
-        padding: 15px;
-        padding-right: 50px;
-        display: inline-block;
         margin: 10px 0;
-        border-radius: 4px;
         font-weight: 400;
+
+        &--wrapper {
+            display: inline-block;
+            background-color: #fff;
+            padding: 15px 50px 15px 0px;
+            border-radius: 4px;
+        }
     }
 
     &__container {
@@ -79,13 +85,15 @@
         background-color:#fff;
         height: 100vh;
         width: 100%;
-        position: relative;
-        right: 0;
+        // position: relative;
+        position:absolute;
+        left: 0;
+        // right: 0;
         transition: all cubic-bezier(0.82, 0, 0.44, 0.93) 1s;
 
         &--slide {
             transition: all ease .4s;
-            width: 40%;
+            width: 40% !important;
             left: 0;
         }
     }
