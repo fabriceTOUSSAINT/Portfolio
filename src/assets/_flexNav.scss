@@ -134,3 +134,18 @@
   // }
 
 }
+
+.flex-nav__container--wrapper {
+    background: green;
+    transform: translateX(0);
+}
+
+.nav-hide {
+    opacity: 0;
+    transition: ease-in-out
+}
+
+.nav-active {
+    opacity: 1;
+    transition: ease-in-out
+}

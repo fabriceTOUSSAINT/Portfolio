@@ -2,7 +2,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Velocity from 'velocity-animate';
-
 //Images
 import logo from '../../assets/images/fab-logo-wht.png'
 
@@ -13,7 +12,13 @@ type State = {
   navKeys: Array<string>
 };
 
+type Props = {
+  toggleFlexNavState: () => {},
+  isFlexNavClose: bool
+}
+
 class FlexNav extends React.Component {
+
   state = {
     isFullPageNav: true,
     fullPageWrapperHeight: '200px',
@@ -107,114 +112,19 @@ class FlexNav extends React.Component {
     return renderComponent;
   }
 
-  dressNavPosition = (navLinkItems: Object): void => {
-      // Transform menu items
-      const navLines = document.querySelectorAll('.flex-nav__line span');
-      const homeBlockLine = document.querySelectorAll('.flex-nav__line');
-      const homeBlockWrapperHeight = document.querySelector('.flex-nav__container--wrapper') || {offsetHeight: 0};
-      const keepHBWHeight = `${homeBlockWrapperHeight.offsetHeight}px`;
-
-      let containerHeight = `${navLinkItems[0].parentElement.parentElement.offsetHeight}px`;
-      navLinkItems[0].parentElement.parentElement.style.height = containerHeight;
-
-      let flexNavLinks = [];
-      let navKeys = [];
-      // convert link text to stand alone in the current position it is in
-      for (let index = navLines.length - 1; index >= 0; index--) {
-        let top = `${navLinkItems[index].offsetTop + 2}px`; //
-        let left = `${navLinkItems[index].offsetLeft}px`;
-        navKeys.push(navLinkItems[index].id);
-        flexNavLinks[navLinkItems[index].id] = {top: top, left: left};
-        // dress new nav text
-        navLinkItems[index].style.left = left;
-        navLinkItems[index].style.top = top;
-      }
-      // debugger;
-      // homeBlockLine.forEach(line => {
-      //   // line.style.display = 'block';
-      // })
-      //$FlowFixMe
-      homeBlockWrapperHeight.style.height = keepHBWHeight;
-
-      this.setState({
-        fullPageWrapperHeight: keepHBWHeight,
-        fullPageLinkPos: flexNavLinks,
-        navKeys: navKeys,
-      });
-
-      const revNavLinkItems = [].slice.call(navLinkItems, 0).reverse();
-      const revNavlinkLen = revNavLinkItems.length - 1;
-
-      // begin hiding unimporntant text, once it dissapears then we'll remove it from DOM
-      navLines.forEach((span, index) => {
-        span.id = 'dissapear';
-        span.style.opacity = '0'; //Hide unimportant text
-        revNavLinkItems[revNavlinkLen - index].style.position = 'absolute';
-        span.style.display = 'none';
-      });
-
-      //setTimeout Hack, first element doesn't seem to have above styles applied before we change them below.
-      setTimeout(() => {
-        navLinkItems.forEach((nav, index) => {
-          nav.classList.add('link-item--shift');
-          let sideTopDist = `${35 * (index + 1) + 100}px`;
-          nav.style.left = '20px';
-          nav.style.top = sideTopDist;
-        });
-      }, 100);
-  }
-
-  undressNavPosition = (navLinkItems: Object): void => {
-    const navLines = document.querySelectorAll('.flex-nav__line span');
-    const linkPositionArr = this.state.fullPageLinkPos;
-    const linkKeys = this.state.navKeys;
-    const cleanNavLinkItems = [];
-
-    // clean links for iteration
-    navLinkItems.forEach(item => {
-      cleanNavLinkItems[item.id] = item;
-    });
-
-    // reset fullpage positions and styles
-    linkKeys.forEach(link => {
-      let top = linkPositionArr[link].top;
-      let left = linkPositionArr[link].left;
-      cleanNavLinkItems[link].style.left = left;
-      cleanNavLinkItems[link].style.top = top;
-      // cleanNavLinkItems[link].style.position = 'static';
-      cleanNavLinkItems[link].classList.remove('link-item--shift');
-    });
-
-    linkKeys.forEach(link => {
-      // cleanNavLinkItems[link].style.position = 'initial';
-    });
-
-    navLines.forEach(span => {
-      span.style.display = 'inline';
-    });
-    setTimeout(() => {
-      linkKeys.forEach(link => {
-        cleanNavLinkItems[link].style.position = 'static';
-      })
-    }, 600);
-
-    setTimeout(() => {
-      navLines.forEach(span => {
-        span.style.opacity = '1';
-      });
-    }, 100);
-
-    // debugger;
-  }
-
   toggleNavShift = (VOID: any, reset: boolean): void => {
     // this.setState({isFullPageNav:false});
     const doNavShiftReset = reset;
+
+    //TODO: use refs here.
     const navLinkItems = document.querySelectorAll('.link-item');
     const homeBlockLine = document.querySelectorAll('.flex-nav__line');
     const imageBackground = document.querySelector('.flex-nav');
     const whiteSlider = document.querySelector('.flex-nav__slider');
-    const screenW = window.innerWidth < 1200 ? 1200 : window.innerWidth;
+    let screenW = window.innerWidth < 1200 ? 1200 : window.innerWidth;
+    screenW = screenW + 300;
+
+    const navItems = document.querySelector('.flex-nav__container--wrapper');
 
     if (this.state.isFullPageNav) {
       homeBlockLine.forEach(line => {
@@ -222,18 +132,21 @@ class FlexNav extends React.Component {
         // line.style.height = 'inherit';
       });
 
-      this.dressNavPosition(navLinkItems);
+
       this.setState((state) => {
         return {isFullPageNav: false}
       });
 
+
       //FIXME: Hack for full slide off screen
-      Velocity(whiteSlider, {width: '200px'});
+      // Velocity(whiteSlider, {width: '0px'});
+      whiteSlider.classList.add('open_slider');
       whiteSlider.style.boxShadow= 'rgba(0, 0, 0, 0.4) -3px 0px 20px';
       // Once i figure out exact photos i will use, include their dimension on the image itself
       // pull image name, regex for size and follow this
       // http://stackoverflow.com/questions/21127479/getting-the-height-of-a-background-image-resized-using-background-size-contain
       Velocity(imageBackground, {backgroundPositionX: -screenW}, [0.82, 0, 0.44, 0.93]);
+      Velocity(navItems, {translateX: -screenW, translateY: '-50%'}, [0.82, 0, 0.44, 0.93]);
     }
 
     else if (doNavShiftReset && !this.state.isFullPageNav) {
@@ -241,14 +154,16 @@ class FlexNav extends React.Component {
         return {isFullPageNav: true}
       });
 
-      Velocity(imageBackground, {backgroundPositionX: 'initial'}, [0.82, 0, 0.44, 0.93]);
-      Velocity(whiteSlider, {width: '100%'}, [0.82, 0, 0.44, 0.93]);
-      // $(whiteSlider).attr('style', '');
-      // debugger;
-      // whiteSlider.style.cssText = '';
-      this.undressNavPosition(navLinkItems);
+
+      Velocity(imageBackground, {backgroundPositionX: 0}, [0.82, 0, 0.44, 0.93]);
+      // Velocity(navItems, {translateX: 0}, [0.82, 0, 0.44, 0.93]);
+      whiteSlider.classList.remove('open_slider');
+
+
     }
 
+    // set parent state to share.
+    this.props.toggleFlexNavState(this.state.isFullPageNav);
   }
 
   render() {
