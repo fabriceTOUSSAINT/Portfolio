@@ -60,7 +60,7 @@
     "global": "^4.3.2",
     "install": "^0.8.7",
     "normalize-scss": "^6.0.0",
-    "npm": "^4.4.1",
+    "npm": "^6.13.4",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-router": "^4.0.0",
