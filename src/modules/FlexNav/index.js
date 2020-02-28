@@ -6,6 +6,10 @@ import Velocity from 'velocity-animate';
 //Images
 import logo from '../../assets/images/fab-logo-wht.png'
 
+// Config
+import config from '../../config';
+
+
 type State = {
   isFullPageNav: boolean,
   fullPageWrapperHeight: string,
@@ -82,6 +86,9 @@ class FlexNav extends React.Component {
     home.classList.remove('flex-nav--slide');
     homePage.classList.remove('flex-nav__slider--slide');
   }
+
+  
+
 
   // render <Link /> or <a /> tags attached with needed event functions
   renderLink = (string: string, dest: string, id: string): Object => {
@@ -208,6 +215,8 @@ class FlexNav extends React.Component {
   }
 
   toggleNavShift = (VOID: any, reset: boolean): void => {
+    if(config.featureFlag.isMVP ) return null;
+
     // this.setState({isFullPageNav:false});
     const doNavShiftReset = reset;
     const navLinkItems = document.querySelectorAll('.link-item');
@@ -287,13 +296,13 @@ class FlexNav extends React.Component {
                 <span>Read my </span>
                 {this.renderLink('Thoughts', '/Blog','flex-nav--blog')}
                 <span> & </span>
-                {this.renderLink('Tweets.', 'https://twitter.com/fabriceBT','flex-nav--twitter')}
+                {this.renderLink('Tweets.', `${config.featureFlag.isMVP ? '#' : 'https://twitter.com/fabriceBT'}`,'flex-nav--twitter')}
               </div>
             </h1>
             <h1 className='flex-nav__line'>
               <div className='flex-nav__line--wrapper'>
                 <span>Lets create, </span>
-                {this.renderLink(email, 'mailto:developer@fabricebt.com','flex-nav--email')}
+                {this.renderLink(email, `mailto:developer@fabricebt.com`,'flex-nav--email')}
               </div>
             </h1>
           </div>
