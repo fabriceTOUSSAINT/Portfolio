@@ -1,0 +1,13 @@
+services:
+  portfolio:
+    environment: 
+      VIRTUAL_HOST: fabricebt.com
+      VIRTUAL_PORT: 3009
+      LETSENCRYPT_HOST: fabricebt.com
+      LETSENCRYPT_EMAIL: developer@fabricebt.com
+    expose:
+      - 3009
+# networks:
+#   default:
+#     external:
+#       name: nginx-proxy
