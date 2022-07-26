@@ -122,7 +122,19 @@ function App() {
                         </TextCTA>
                     </Text>
                 </Body>
+                <Footer>
+                    <Link
+                        target="_blank"
+                        href="https://www.linkedin.com/in/fabrice-toussaint-68a39a50/"
+                    >
+                        Linkedin
+                    </Link>
+                    <Link target="_blank" href="/pdfs/Resume_2022.pdf">
+                        Resume
+                    </Link>
+                </Footer>
             </HomeWrapper>
+
             {!isMobile && (
                 <Suspense fallback={<div>loading</div>}>
                     <BackgroundImageCurtain openCurtain={isMouseOver}>
@@ -233,6 +245,22 @@ const Text = styled.div<{ noMargin?: boolean }>`
   display-inline-flex;
   width: fit-content;
   
+`
+
+const Link = styled.a`
+    color: #8b1d12;
+    font-size: 14px;
+
+    :last-child {
+        padding-left: 8px;
+    }
+`
+
+const Footer = styled.div`
+    display: flex;
+    flex-grow: 1;
+    align-items: flex-end;
+    padding: 20px;
 `
 
 const Body = styled.div`
