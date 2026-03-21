@@ -4,7 +4,7 @@ import { StaggeredLines } from './StaggeredLines'
 import { CopyToast } from './CopyToast'
 import { useTerminalAnimation } from '../hooks/useTerminalAnimation'
 
-const TOTAL_SECTIONS = 5
+const TOTAL_SECTIONS = 6
 
 /* ── Prompt line ── */
 
@@ -23,7 +23,7 @@ function Prompt({
       {animate ? (
         <TypingEffect
           text={command}
-          speed={25}
+          speed={18}
           onComplete={onTypingDone}
           className="text-term-text"
         />
@@ -52,7 +52,7 @@ function Output({
   if (!visible) return null
 
   return (
-    <div className="mt-6 ml-6 pl-8 border-l-2 border-term-border/60">
+    <div className="mt-4 sm:mt-6 ml-3 sm:ml-6 pl-4 sm:pl-8 border-l-2 border-term-border/60">
       <StaggeredLines
         animate={animate}
         delay={staggerDelay}
@@ -119,10 +119,10 @@ export function TerminalSession() {
     <>
       <CopyToast visible={copied} />
 
-      <div className="flex-1 px-10 sm:px-20 lg:px-32 pt-4 sm:pt-6 pb-16 sm:pb-24 max-w-5xl">
+      <div className="flex-1 px-5 sm:px-20 lg:px-32 pt-4 sm:pt-6 pb-16 sm:pb-24 max-w-5xl">
         {/* ── whoami ── */}
         {isSectionVisible(0) && (
-          <section className="mb-16 sm:mb-20">
+          <section className="mb-12 sm:mb-16">
             <Prompt
               command="whoami"
               animate={isAnimatingCommand(0)}
@@ -132,7 +132,7 @@ export function TerminalSession() {
               visible={isOutputVisible(0)}
               animate={shouldAnimateOutput(0)}
               onAllLinesShown={anim.onOutputComplete}
-              staggerDelay={100}
+              staggerDelay={70}
             >
               <h1 className="text-3xl sm:text-4xl font-bold text-term-text mb-2">
                 Fabrice Toussaint
@@ -141,7 +141,7 @@ export function TerminalSession() {
                 Staff Software Engineer · New York
               </p>
               <p className="text-term-muted text-sm sm:text-base leading-relaxed max-w-2xl">
-                Founding engineer at{' '}
+                10+ years building software at startups. Founding engineer at{' '}
                 <Link href="https://www.swantide.com">Swantide</Link> — I own
                 product, platform, and infrastructure end-to-end. From
                 shipping AI-powered GTM automation to building internal
@@ -153,7 +153,7 @@ export function TerminalSession() {
 
         {/* ── skills ── */}
         {isSectionVisible(1) && (
-          <section className="mb-16 sm:mb-20">
+          <section className="mb-12 sm:mb-16">
             <Prompt
               command="ls skills/"
               animate={isAnimatingCommand(1)}
@@ -163,11 +163,11 @@ export function TerminalSession() {
               visible={isOutputVisible(1)}
               animate={shouldAnimateOutput(1)}
               onAllLinesShown={anim.onOutputComplete}
-              staggerDelay={150}
+              staggerDelay={100}
             >
               <div>
                 <span className="text-syn-comment text-xs italic block mb-1">{'// infrastructure & platform'}</span>
-                <div className="flex flex-wrap gap-x-10 gap-y-1 text-sm sm:text-base">
+                <div className="flex flex-wrap gap-x-5 sm:gap-x-10 gap-y-1 text-sm sm:text-base">
                   <span className="text-syn-function">Kubernetes</span>
                   <span className="text-syn-function">Docker</span>
                   <span className="text-syn-function">GCP</span>
@@ -177,7 +177,7 @@ export function TerminalSession() {
               </div>
               <div className="mt-5">
                 <span className="text-syn-comment text-xs italic block mb-1">{'// languages'}</span>
-                <div className="flex flex-wrap gap-x-10 gap-y-1 text-sm sm:text-base">
+                <div className="flex flex-wrap gap-x-5 sm:gap-x-10 gap-y-1 text-sm sm:text-base">
                   <span className="text-syn-keyword">TypeScript</span>
                   <span className="text-syn-keyword">Python</span>
                   <span className="text-syn-keyword">Go</span>
@@ -185,7 +185,7 @@ export function TerminalSession() {
               </div>
               <div className="mt-5">
                 <span className="text-syn-comment text-xs italic block mb-1">{'// frameworks'}</span>
-                <div className="flex flex-wrap gap-x-10 gap-y-1 text-sm sm:text-base">
+                <div className="flex flex-wrap gap-x-5 sm:gap-x-10 gap-y-1 text-sm sm:text-base">
                   <span className="text-syn-constant">React</span>
                   <span className="text-syn-constant">Node.js</span>
                   <span className="text-syn-constant">FastAPI</span>
@@ -194,7 +194,7 @@ export function TerminalSession() {
               </div>
               <div className="mt-5">
                 <span className="text-syn-comment text-xs italic block mb-1">{'// data'}</span>
-                <div className="flex flex-wrap gap-x-10 gap-y-1 text-sm sm:text-base">
+                <div className="flex flex-wrap gap-x-5 sm:gap-x-10 gap-y-1 text-sm sm:text-base">
                   <span className="text-syn-type">PostgreSQL</span>
                   <span className="text-syn-type">MongoDB</span>
                   <span className="text-syn-type">Redis</span>
@@ -207,11 +207,11 @@ export function TerminalSession() {
           </section>
         )}
 
-        {/* ── interests ── */}
+        {/* ── history ── */}
         {isSectionVisible(2) && (
-          <section className="mb-16 sm:mb-20">
+          <section className="mb-12 sm:mb-16">
             <Prompt
-              command="cat interests.txt"
+              command="history"
               animate={isAnimatingCommand(2)}
               onTypingDone={anim.onTypingComplete}
             />
@@ -219,29 +219,65 @@ export function TerminalSession() {
               visible={isOutputVisible(2)}
               animate={shouldAnimateOutput(2)}
               onAllLinesShown={anim.onOutputComplete}
-              staggerDelay={100}
+              staggerDelay={80}
             >
-              <div className="text-sm sm:text-base">
-                <span className="text-syn-comment mr-3">{'>'}</span>
-                <span className="text-term-text">code</span>
+              <div>
+                <div className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-x-6 text-sm sm:text-base">
+                  <span className="text-syn-comment w-auto sm:w-32 shrink-0">2023 – now</span>
+                  <div>
+                    <span className="text-term-text font-semibold">Swantide</span>
+                    <span className="text-term-muted"> · Founding Engineer</span>
+                  </div>
+                </div>
+                <p className="text-term-muted text-xs sm:text-sm mt-1 sm:ml-38">
+                  Full ownership across product, platform, and infrastructure in a 2-engineer team
+                </p>
               </div>
-              <div className="text-sm sm:text-base">
-                <span className="text-syn-comment mr-3">{'>'}</span>
-                <span className="text-term-text">photography</span>
+              <div>
+                <div className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-x-6 text-sm sm:text-base">
+                  <span className="text-syn-comment w-auto sm:w-32 shrink-0">2019 – 2022</span>
+                  <div>
+                    <span className="text-term-text font-semibold">Revel</span>
+                    <span className="text-term-muted"> · Senior Software Engineer</span>
+                  </div>
+                </div>
+                <p className="text-term-muted text-xs sm:text-sm mt-1 sm:ml-38">
+                  Led frontend and API gateway; shipped 7 products from idea to production
+                </p>
               </div>
-              <div className="text-sm sm:text-base">
-                <span className="text-syn-comment mr-3">{'>'}</span>
-                <span className="text-term-text">building dev tools</span>
+              <div>
+                <div className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-x-6 text-sm sm:text-base">
+                  <span className="text-syn-comment w-auto sm:w-32 shrink-0">2017 – 2019</span>
+                  <div>
+                    <span className="text-term-text font-semibold">Group Nine Media</span>
+                    <span className="text-term-muted"> · Software Engineer</span>
+                  </div>
+                </div>
+                <p className="text-term-muted text-xs sm:text-sm mt-1 sm:ml-38">
+                  Led React adoption across the frontend org; built 4 products from data pipelines to consumer sites
+                </p>
+              </div>
+              <div>
+                <div className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-x-6 text-sm sm:text-base">
+                  <span className="text-syn-comment w-auto sm:w-32 shrink-0">2016 – 2017</span>
+                  <div>
+                    <span className="text-term-text font-semibold">Complex Media</span>
+                    <span className="text-term-muted"> · Front-End Developer</span>
+                  </div>
+                </div>
+                <p className="text-term-muted text-xs sm:text-sm mt-1 sm:ml-38">
+                  React/Redux components across 6 high-traffic consumer sites
+                </p>
               </div>
             </Output>
           </section>
         )}
 
-        {/* ── contact ── */}
+        {/* ── projects ── */}
         {isSectionVisible(3) && (
-          <section className="mb-16 sm:mb-20">
+          <section className="mb-12 sm:mb-16">
             <Prompt
-              command="contact --list"
+              command="ls projects/"
               animate={isAnimatingCommand(3)}
               onTypingDone={anim.onTypingComplete}
             />
@@ -249,10 +285,57 @@ export function TerminalSession() {
               visible={isOutputVisible(3)}
               animate={shouldAnimateOutput(3)}
               onAllLinesShown={anim.onOutputComplete}
-              staggerDelay={120}
+              staggerDelay={100}
             >
-              <div className="flex flex-wrap items-baseline gap-x-6 text-sm sm:text-base">
-                <span className="text-syn-variable w-28 shrink-0">email</span>
+              <div>
+                <span className="text-syn-constant font-semibold text-sm sm:text-base">sd — Local Dev Platform</span>
+                <p className="text-term-muted text-xs sm:text-sm mt-1 max-w-2xl">
+                  Built a Go CLI wrapping Kubernetes, Helm, and Docker for local development.
+                  One command to spin up all 9 microservices. Now used by every engineer on the team.
+                </p>
+              </div>
+              <div className="mt-4">
+                <span className="text-syn-constant font-semibold text-sm sm:text-base">Frontend Modernization</span>
+                <p className="text-term-muted text-xs sm:text-sm mt-1 max-w-2xl">
+                  Migrated CRA → Vite, Redux → TanStack Query, MUI v4 → v5 — all incrementally
+                  in production with zero downtime. No feature freeze.
+                </p>
+              </div>
+              <div className="mt-4">
+                <span className="text-syn-constant font-semibold text-sm sm:text-base">CI/CD & Shared Infrastructure</span>
+                <p className="text-term-muted text-xs sm:text-sm mt-1 max-w-2xl">
+                  Authored a reusable GitHub Actions library consumed by all 8 repos.
+                  Built a shared Python package (48 releases) used by every backend service.
+                  Cut Docker build times from 17 min to 2 min.
+                </p>
+              </div>
+              <div className="mt-4">
+                <span className="text-syn-constant font-semibold text-sm sm:text-base">RBAC System</span>
+                <p className="text-term-muted text-xs sm:text-sm mt-1 max-w-2xl">
+                  Designed and shipped end-to-end — from RFC to Kubernetes sidecar,
+                  Express middleware, and frontend permission hooks. No handoffs.
+                </p>
+              </div>
+            </Output>
+          </section>
+        )}
+
+        {/* ── contact ── */}
+        {isSectionVisible(4) && (
+          <section className="mb-10 sm:mb-14">
+            <Prompt
+              command="contact --list"
+              animate={isAnimatingCommand(4)}
+              onTypingDone={anim.onTypingComplete}
+            />
+            <Output
+              visible={isOutputVisible(4)}
+              animate={shouldAnimateOutput(4)}
+              onAllLinesShown={anim.onOutputComplete}
+              staggerDelay={70}
+            >
+              <div className="flex flex-col sm:flex-row sm:flex-wrap sm:items-baseline gap-1 sm:gap-x-6 text-sm sm:text-base">
+                <span className="text-syn-variable w-auto sm:w-28 shrink-0">email</span>
                 <button
                   onClick={handleCopy}
                   className="text-syn-string underline decoration-syn-string/30 underline-offset-4 hover:decoration-syn-string/80 transition-all duration-200 cursor-pointer"
@@ -263,20 +346,20 @@ export function TerminalSession() {
                   {'// click to copy'}
                 </span>
               </div>
-              <div className="flex items-baseline gap-x-6 text-sm sm:text-base">
-                <span className="text-syn-variable w-28 shrink-0">github</span>
+              <div className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-x-6 text-sm sm:text-base">
+                <span className="text-syn-variable w-auto sm:w-28 shrink-0">github</span>
                 <Link href="https://github.com/fabriceTOUSSAINT">
                   fabriceTOUSSAINT
                 </Link>
               </div>
-              <div className="flex items-baseline gap-x-6 text-sm sm:text-base">
-                <span className="text-syn-variable w-28 shrink-0">linkedin</span>
+              <div className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-x-6 text-sm sm:text-base">
+                <span className="text-syn-variable w-auto sm:w-28 shrink-0">linkedin</span>
                 <Link href="https://www.linkedin.com/in/fabrice-toussaint-68a39a50/">
                   fabrice-toussaint
                 </Link>
               </div>
-              <div className="flex items-baseline gap-x-6 text-sm sm:text-base">
-                <span className="text-syn-variable w-28 shrink-0">instagram</span>
+              <div className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-x-6 text-sm sm:text-base">
+                <span className="text-syn-variable w-auto sm:w-28 shrink-0">instagram</span>
                 <Link href="https://www.instagram.com/brb.mom.needs.computer/">
                   @brb.mom.needs.computer
                 </Link>
@@ -286,16 +369,16 @@ export function TerminalSession() {
         )}
 
         {/* ── resume ── */}
-        {isSectionVisible(4) && (
-          <section className="mb-16 sm:mb-20">
+        {isSectionVisible(5) && (
+          <section className="mb-10 sm:mb-14">
             <Prompt
               command="cat resume.pdf | open"
-              animate={isAnimatingCommand(4)}
+              animate={isAnimatingCommand(5)}
               onTypingDone={anim.onTypingComplete}
             />
             <Output
-              visible={isOutputVisible(4)}
-              animate={shouldAnimateOutput(4)}
+              visible={isOutputVisible(5)}
+              animate={shouldAnimateOutput(5)}
               onAllLinesShown={anim.onOutputComplete}
             >
               <a
