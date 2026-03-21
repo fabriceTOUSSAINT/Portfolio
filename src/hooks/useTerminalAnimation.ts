@@ -1,40 +1,35 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useCallback } from 'react'
 
-const SESSION_KEY = 'terminal-animated'
+type Phase = 'typing' | 'output'
 
 interface AnimationState {
-  /** Which section index is currently being revealed (0-based) */
   activeSection: number
-  /** Whether all sections have been revealed */
+  phase: Phase
   complete: boolean
-  /** Whether we should skip animation entirely (revisit) */
   skipAnimation: boolean
-  /** Call when a section's typing animation completes */
-  onSectionComplete: () => void
+  onTypingComplete: () => void
+  onOutputComplete: () => void
 }
 
 export function useTerminalAnimation(totalSections: number): AnimationState {
-  const [skipAnimation] = useState(() => {
-    if (typeof window === 'undefined') return false
-    return sessionStorage.getItem(SESSION_KEY) === 'true'
-  })
+  const [activeSection, setActiveSection] = useState(0)
+  const [phase, setPhase] = useState<Phase>('typing')
 
-  const [activeSection, setActiveSection] = useState(skipAnimation ? totalSections : 0)
-
-  const onSectionComplete = useCallback(() => {
-    setActiveSection((prev) => prev + 1)
+  const onTypingComplete = useCallback(() => {
+    setPhase('output')
   }, [])
 
-  useEffect(() => {
-    if (activeSection >= totalSections && !skipAnimation) {
-      sessionStorage.setItem(SESSION_KEY, 'true')
-    }
-  }, [activeSection, totalSections, skipAnimation])
+  const onOutputComplete = useCallback(() => {
+    setActiveSection((prev) => prev + 1)
+    setPhase('typing')
+  }, [])
 
   return {
     activeSection,
+    phase,
     complete: activeSection >= totalSections,
-    skipAnimation,
-    onSectionComplete,
+    skipAnimation: false,
+    onTypingComplete,
+    onOutputComplete,
   }
 }
