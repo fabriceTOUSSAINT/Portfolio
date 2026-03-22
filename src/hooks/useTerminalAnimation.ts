@@ -1,6 +1,8 @@
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useEffect } from 'react'
 
 type Phase = 'typing' | 'output'
+
+const ANIMATION_KEY = 'terminal-animation-played'
 
 interface AnimationState {
   activeSection: number
@@ -12,8 +14,19 @@ interface AnimationState {
 }
 
 export function useTerminalAnimation(totalSections: number): AnimationState {
-  const [activeSection, setActiveSection] = useState(0)
+  const [hasPlayed] = useState(
+    () => sessionStorage.getItem(ANIMATION_KEY) === 'true',
+  )
+  const [activeSection, setActiveSection] = useState(
+    hasPlayed ? totalSections : 0,
+  )
   const [phase, setPhase] = useState<Phase>('typing')
+
+  useEffect(() => {
+    if (!hasPlayed && activeSection >= totalSections) {
+      sessionStorage.setItem(ANIMATION_KEY, 'true')
+    }
+  }, [hasPlayed, activeSection, totalSections])
 
   const onTypingComplete = useCallback(() => {
     setPhase('output')
@@ -28,7 +41,7 @@ export function useTerminalAnimation(totalSections: number): AnimationState {
     activeSection,
     phase,
     complete: activeSection >= totalSections,
-    skipAnimation: false,
+    skipAnimation: hasPlayed,
     onTypingComplete,
     onOutputComplete,
   }
