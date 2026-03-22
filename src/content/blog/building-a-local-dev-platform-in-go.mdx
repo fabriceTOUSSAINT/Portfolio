@@ -1,0 +1,18 @@
+---
+title: "Building a Local Dev Platform in Go"
+date: "2026-04-15"
+tags: ["go", "kubernetes", "devtools", "platform"]
+draft: true
+description: "How I built a CLI tool wrapping Kubernetes, Helm, and Docker to give every engineer a single-command local development environment."
+---
+
+# Building a Local Dev Platform in Go
+
+*Coming soon — this post will cover the architecture, design decisions, and lessons learned from building `sd`, a Go CLI that replaced fragile scripts with a single-command Kubernetes environment.*
+
+## What you'll learn
+
+- Why we chose Go and Cobra for the CLI framework
+- How `helm template` + `kubectl apply` gives you production-parity locally
+- The tradeoffs of wrapping kind vs. minikube vs. Docker Compose
+- Distribution strategies for internal CLI tools via GCP Artifact Registry
